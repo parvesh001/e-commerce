@@ -1,0 +1,51 @@
+.mainHeader{
+    padding: .7rem 2.5rem;
+    background: #fff;
+    box-shadow: 2px 2px 10px rgba(0,0,0,08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 5rem;
+}
+
+.mainHeader .navList{
+   display: flex;
+   flex-direction: column;
+   list-style: none;
+   gap: 1.5rem;
+   margin: 0;
+   position:fixed;
+   height: 100vh;
+   background: #fff;
+   top:0;
+   right: 0;
+   padding:1.5rem 2rem;
+   width:50%;
+   max-width: 300px;
+}
+
+@media only screen and (min-width:640px) {
+    .mainHeader .navList{
+        flex-direction: row;
+        height: 5rem;
+        position: relative;
+        max-width: 100%;
+    }
+}
+
+.mainHeader .navList .navlink{
+    text-decoration: none;
+    color: #f3a8a4;
+    font-weight: 600;
+    font-size: 1.2rem;
+    transition: all .2s ease;
+}
+
+.mainHeader .navList .navlink.active,.mainHeader .navList .navlink:hover{
+   color:#e63129;
+   border-bottom: 2.5px solid #e63129;
+}
+
+.logo{
+    width: 110px;
+}
