@@ -1,0 +1,11 @@
+.feature-container{
+    width: 12.5rem;
+    p{
+        color:rgb(230, 49, 41)
+    }
+}
+@media only screen and(min-width:320px) and(max-width:480px) {
+    .feature-container{
+        width: 100%;
+    }
+}

@@ -1,26 +1,90 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
-import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css'
-import logo from '../../Assets/logo/puma.png'
-import style from './MainHeader.module.css'
+import React from "react";
+import { NavLink, Link } from "react-router-dom";
+import "../../../node_modules/bootstrap/js/dist/offcanvas";
+import logo from "../../Assets/logo/puma.png";
+import style from "./MainHeader.module.scss";
+import { BsFillCartCheckFill } from "react-icons/bs";
+
 
 export default function MainHeader() {
-    const linksClasses = (navData) => (navData.isActive ? `${style.active} ${style.navlink}` : style.navlink);
+  const linkClasses = (navData) =>
+    navData.isActive
+      ? `${"nav-link"} ${style.navLink} ${style.active}`
+      : `${"nav-link"} ${style.navLink}`;
   return (
     <header className={style.mainHeader}>
-      <div className={style.logo}>
-        <img src={logo} width="100%" alt="website-logo" />
-      </div>
-      <nav>
-        <ul className={style.navList}>
-            <li><NavLink className={linksClasses} to='/home'>Home</NavLink></li>
-            <li><NavLink className={linksClasses} to='/shop'>Shop</NavLink></li>
-            <li><NavLink className={linksClasses} to='/blog'>Blog</NavLink></li>
-            <li><NavLink className={linksClasses} to='/about'>About</NavLink></li>
-            <li><NavLink className={linksClasses} to='/contact'>Contact</NavLink></li>
-            <li><NavLink className={linksClasses} to='/cart'>Cart</NavLink></li>
-        </ul>
+      <nav className="navbar navbar-expand-md navbar-light bg-light fixed-top">
+        <div className="container-fluid">
+          <Link className="navbar-brand" to="/home">
+            <img src={logo} width="100" alt="site-logo" />
+          </Link>
+          <button
+            className={`${"navbar-toggler"} ${style.navbarToggler}`}
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasNavbar"
+            aria-controls="offcanvasNavbar"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div
+            className="offcanvas offcanvas-end"
+            tabindex="-1"
+            id="offcanvasNavbar"
+            aria-labelledby="offcanvasNavbarLabel"
+          >
+            <div className="offcanvas-header">
+              <h5 className="offcanvas-title" id="offcanvasNavbarLabel">
+                Puma
+              </h5>
+              <button
+                type="button"
+                className="btn-close text-reset"
+                data-bs-dismiss="offcanvas"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div className="offcanvas-body">
+              <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <li className="nav-item">
+                  <NavLink
+                    className={linkClasses}
+                    aria-current="page"
+                    to="/home"
+                  >
+                    Home
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink className={linkClasses} to="/shop">
+                    Shop
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink className={linkClasses} to="/blog">
+                    Blog
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink className={linkClasses} to="/contact">
+                    Contact
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink className={linkClasses} to="/about">
+                    About
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink className={linkClasses} to="/cart">
+                    <BsFillCartCheckFill className="fs-4"/>
+                  </NavLink>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </nav>
     </header>
-  )
+  );
 }

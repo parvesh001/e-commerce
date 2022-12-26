@@ -1,0 +1,56 @@
+.home-hero{
+    background-image: url(../../Assets/Heros/banner-model-before.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: right;
+    height: 88vh;
+    width: 100vw;
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-inline: 4rem;
+    color:#fff;
+    letter-spacing: 5px;
+    word-spacing: 5px;
+    & div{
+       display: flex;
+       & span{
+        align-self: flex-end;
+        padding-top: 2.3rem;
+        word-spacing: 2px;
+        letter-spacing: 2px;
+       }
+    }
+    & p{
+        color:rgb(230, 49, 41);
+        width: fit-content;
+        padding: 2px 5px;
+    }
+}
+
+@media only screen and(min-width:320px) and(max-width:480px) {
+    .home-hero{
+        height: 40vh;
+        padding-inline: 1rem;
+        letter-spacing: 2px;
+        word-spacing: 2px;
+        & h1{
+            font-size: 1.2rem;
+        }
+        & h2{
+            font-size: 1rem;
+        }
+        & div{
+            & span{
+             padding-top: .7rem;
+             word-spacing: 0;
+             letter-spacing: 0;
+            }
+         }
+         & p{
+            font-size: .8rem!important;
+         }
+
+    }
+}

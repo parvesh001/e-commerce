@@ -1,0 +1,20 @@
+.navbarToggler{
+    border: none;
+    &:focus{
+        box-shadow: none;
+    }
+    
+}
+
+.navLink{
+    color: rgb(255, 182, 179);
+    font-weight: 600;
+    font-size: 1.1rem;
+    &.active, &:hover{
+        color:rgb(230,49,41)!important;
+    }
+}
+.logo{
+    width: 110px;
+}
+
