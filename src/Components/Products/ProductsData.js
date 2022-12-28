@@ -1,67 +1,59 @@
-import p1 from "../../Assets/Products/A.webp";
-import p2 from "../../Assets/Products/B.webp";
-import p3 from "../../Assets/Products/C.webp";
-import p4 from "../../Assets/Products/D.webp";
-import p5 from "../../Assets/Products/E.webp";
-import p6 from "../../Assets/Products/F.jpg";
-import p7 from "../../Assets/Products/G.webp";
-import p8 from "../../Assets/Products/H.webp";
 
 export const Product__Data = [
   {
-    id: "1",
-    img: p1,
-    title: "Yellow Top",
-    subTitle: "Beautiful Top",
+    id: "BBQ",
+    img: "/Images/Products/1.jpg",
+    title: "BBQ",
+    subTitle: "Premium Huddie",
     price: "200",
   },
   {
-    id: "2",
-    img: p2,
-    title: "Ranbow Top",
-    subTitle: "Beautiful Top",
+    id: "BeingHuman",
+    img: "/Images/Products/4.jpg",
+    title: "Being Human",
+    subTitle: "Premium Huddie",
     price: "200",
   },
   {
-    id: "3",
-    img: p3,
-    title: "Red Top",
-    subTitle: "Beautiful Top",
+    id: "Rostar",
+    img: "/Images/Products/5.jpg",
+    title: "Rostar",
+    subTitle: "Premium t-shirt",
     price: "200",
   },
   {
-    id: "4",
-    img: p4,
-    title: "White Top",
-    subTitle: "Beautiful Top",
+    id: "Zaccky",
+    img: "/Images/Products/7.jpg",
+    title: "Zaccky",
+    subTitle: "Premium t-shir",
     price: "200",
   },
   {
-    id: "5",
-    img: p5,
-    title: "Funky Shirt",
-    subTitle: "Beautiful Shirt",
+    id: "Rock Star",
+    img: "/Images/Products/8.jpg",
+    title: "Rock Star",
+    subTitle: "Premium t-shir",
     price: "200",
   },
   {
-    id: "6",
-    img: p6,
-    title: "Gray Top",
-    subTitle: "Beautiful Top",
+    id: "Zarra",
+    img: "/Images/Products/9.jpg",
+    title: "Zarra",
+    subTitle: "Premium jacket",
     price: "200",
   },
   {
-    id: "7",
-    img: p7,
-    title: "Skyblue Top",
-    subTitle: "Beautiful Top",
+    id: "Dry",
+    img: "/Images/Products/10.jpg",
+    title: "Dry",
+    subTitle: "Premium t-shir",
     price: "200",
   },
   {
-    id: "8",
-    img: p8,
-    title: "Night Suit",
-    subTitle: "Beautiful Suit",
+    id: "Pumma",
+    img: "/Images/Products/11.jpg",
+    title: "Pumma",
+    subTitle: "Premium t-shir",
     price: "200",
   },
 ];

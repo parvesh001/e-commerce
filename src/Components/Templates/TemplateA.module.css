@@ -1,0 +1,13 @@
+.template-A {
+  background-image: url("pexels-ylanite-koppens-934070.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100vw;
+  height: 18rem;
+  text-align: center;
+  text-shadow: 1.5px 1.5px 10px rgb(0, 0, 0);
+}
+.template-A h4 {
+  color: white;
+}/*# sourceMappingURL=TemplateA.module.css.map */

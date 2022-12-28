@@ -3,7 +3,7 @@ import style from "./Feature.module.scss";
 
 export default function Feature(props) {
   return (
-    <React.Fragment>
+    <div className="p-2 p-sm-3 d-flex justify-content-center">
       <div className={`${style["feature-container"]} ${"card"}`}>
         <img src={props.srcImg} className="card-img-top" alt={props.altText} />
         <div className="card-body">
@@ -13,6 +13,6 @@ export default function Feature(props) {
           </p>
         </div>
       </div>
-    </React.Fragment>
+    </div>
   );
 }

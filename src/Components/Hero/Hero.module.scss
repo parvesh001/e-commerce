@@ -1,5 +1,5 @@
 .home-hero{
-    background-image: url(../../Assets/Heros/banner-model-before.png);
+    background-image: url(banner-model-before.png);
     background-repeat: no-repeat;
     background-size: contain;
     background-position: right;
@@ -13,20 +13,27 @@
     color:#fff;
     letter-spacing: 5px;
     word-spacing: 5px;
-    & div{
+    div{
        display: flex;
-       & span{
+        span{
         align-self: flex-end;
         padding-top: 2.3rem;
         word-spacing: 2px;
         letter-spacing: 2px;
        }
     }
-    & p{
+    p{
         color:rgb(230, 49, 41);
         width: fit-content;
         padding: 2px 5px;
     }
+    a{
+        color:#fff;
+        &:hover{
+            color:#e63129
+        }
+    }
+
 }
 
 @media only screen and(min-width:320px) and(max-width:480px) {

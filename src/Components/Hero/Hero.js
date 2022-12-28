@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import TransparentButton from '../../UI/TransparentButton/TransparentButton'
 import style from './Hero.module.scss'
 
@@ -11,7 +12,7 @@ export default function Hero() {
       <span className='mt-2'>On All Products</span>
       </div>
       <p className='mt-2 fs-5 bg-light'>Save More With Coupans and Upto 70% Off!</p>
-      <TransparentButton className='mt-1 mt-md-3'>Shop Now</TransparentButton>
+      <TransparentButton className='mt-1 mt-md-3'><Link className='text-decoration-none' to="/shop">Shop Now</Link></TransparentButton>
     </div>
   )
 }

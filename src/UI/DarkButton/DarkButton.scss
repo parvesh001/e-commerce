@@ -1,0 +1,10 @@
+.dark-btn{
+    button{
+        background: #e63129;
+        color:#fff;
+        &:hover{
+            background: #fff;
+            color:#e63129;
+        }
+      }
+}

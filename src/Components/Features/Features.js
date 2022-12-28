@@ -1,41 +1,35 @@
 import React from "react";
-import f1 from "../../Assets/Features/feel-happy.jpg";
-import f2 from "../../Assets/Features/online-order.jpg";
-import f3 from "../../Assets/Features/open24hours.jpg";
-import f4 from "../../Assets/Features/free-shipping.jpg";
-import f5 from "../../Assets/Features/promotion.jpg";
-import f6 from "../../Assets/Features/save-money.jpg";
 import Feature from "./Feature";
 
 const DUMMY_DATA = [
   {
     id: "f1",
-    imgSrc: f1,
+    imgSrc: "/Images/Features/feel-happy.jpg",
     altText: "feature-one",
   },
   {
     id: "f2",
-    imgSrc: f2,
+    imgSrc: "/Images/Features/online-order.jpg",
     altText: "feature-two",
   },
   {
     id: "f3",
-    imgSrc: f3,
+    imgSrc: "/Images/Features/open24hours.jpg",
     altText: "feature-three",
   },
   {
     id: "f4",
-    imgSrc: f4,
+    imgSrc: "/Images/Features/free-shipping.jpg",
     altText: "feature-four",
   },
   {
     id: "f5",
-    imgSrc: f5,
+    imgSrc: "/Images/Features/promotion.jpg",
     altText: "feature-five",
   },
   {
     id: "f6",
-    imgSrc: f6,
+    imgSrc: "/Images/Features/save-money.jpg",
     altText: "feature-six",
   },
 ];
@@ -50,7 +44,7 @@ const features = DUMMY_DATA.map((featureData) => {
   );
 });
 
-const featuresContainerClasses = "mt-2 mt-md-5 px-md-5 px-2 d-flex flex-column flex-md-row align-items-center gap-3"
+const featuresContainerClasses = "mt-2 mt-md-5 px-md-5 px-2 row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-6 gx-0"
 
 export default function Features() {
   return (

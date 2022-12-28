@@ -1,0 +1,8 @@
+.dark-btn button {
+  background: #e63129;
+  color: #fff;
+}
+.dark-btn button:hover {
+  background: #fff;
+  color: #e63129;
+}/*# sourceMappingURL=DarkButton.css.map */

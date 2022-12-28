@@ -1,7 +1,6 @@
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
 import "../../../node_modules/bootstrap/js/dist/offcanvas";
-import logo from "../../Assets/logo/puma.png";
 import style from "./MainHeader.module.scss";
 import { BsFillCartCheckFill } from "react-icons/bs";
 
@@ -16,7 +15,7 @@ export default function MainHeader() {
       <nav className="navbar navbar-expand-md navbar-light bg-light fixed-top">
         <div className="container-fluid">
           <Link className="navbar-brand" to="/home">
-            <img src={logo} width="100" alt="site-logo" />
+            <img src="images/logo/puma.png" width="100" alt="site-logo" />
           </Link>
           <button
             className={`${"navbar-toggler"} ${style.navbarToggler}`}

@@ -1,5 +1,5 @@
 .home-hero {
-  background-image: url(../../Assets/Heros/banner-model-before.png);
+  background-image: url(banner-model-before.png);
   background-repeat: no-repeat;
   background-size: contain;
   background-position: right;
@@ -29,6 +29,12 @@
   width: -moz-fit-content;
   width: fit-content;
   padding: 2px 5px;
+}
+.home-hero a {
+  color: #fff;
+}
+.home-hero a:hover {
+  color: #e63129;
 }
 
 @media only screen and (min-width: 320px) and (max-width: 480px) {

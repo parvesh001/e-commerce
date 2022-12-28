@@ -1,14 +1,18 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AiFillStar, AiOutlineShoppingCart } from "react-icons/ai";
 
 export default function Product(props) {
+  const navigate = useNavigate();
+  const productClickHandler = ()=>{
+        navigate(`/shop/${props.id}`)
+  }
   return (
-    <div className="p-2 p-md-3">
+    <div className="p-2 p-md-3" onClick={productClickHandler}>
       <div className="card">
         <img src={props.srcImg} className="card-img-top" alt="product-img" />
         <div className="card-body">
-          <h4 className="card-title mb-0">{props.title}</h4>
+          <h4 className="card-title mb-0 text-nowrap">{props.title}</h4>
           <p style={{ color: "#f96058", fontSize: "small", margin: "0" }}>
             <i>{props.subTitle}</i>
           </p>
