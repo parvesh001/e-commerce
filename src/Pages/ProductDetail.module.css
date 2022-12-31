@@ -1,0 +1,9 @@
+.product-detail {
+  margin-top: 8rem;
+  color: #fff;
+}
+@media only screen and (max-width: 640px) {
+  .product-detail {
+    margin-top: 5rem;
+  }
+}/*# sourceMappingURL=ProductDetail.module.css.map */

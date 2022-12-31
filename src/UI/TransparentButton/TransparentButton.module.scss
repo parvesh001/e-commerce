@@ -1,0 +1,11 @@
+.transparent-btn{
+   button{
+    a {
+        color: #fff;
+       }
+        &:hover a{
+            color: #e63129 !important;
+        }
+   }
+       
+}

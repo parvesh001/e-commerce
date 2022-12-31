@@ -8,7 +8,7 @@ export default function Product(props) {
         navigate(`/shop/${props.id}`)
   }
   return (
-    <div className="p-2 p-md-3" onClick={productClickHandler}>
+    <div className="p-2 p-md-3" onClick={productClickHandler}  style={{ cursor: "pointer" }}>
       <div className="card">
         <img src={props.srcImg} className="card-img-top" alt="product-img" />
         <div className="card-body">
@@ -23,14 +23,9 @@ export default function Product(props) {
             <AiFillStar />
             <AiFillStar />
           </div>
-          <h4 className="mt-1">{props.price}</h4>
+          <h4 className="mt-1">{`$ ${props.price}`}</h4>
           <div>
-            <AiOutlineShoppingCart
-              style={{ cursor: "pointer" }}
-              className="d-block ms-auto fs-3"
-            >
-              <Link />
-            </AiOutlineShoppingCart>
+            <AiOutlineShoppingCart className="d-block ms-auto fs-3"/>
           </div>
         </div>
       </div>

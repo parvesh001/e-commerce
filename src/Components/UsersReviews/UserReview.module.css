@@ -1,7 +1,13 @@
 .user {
   text-align: center;
 }
-.user img {
+.user div {
+  height: 120px;
+  width: 120px;
+  margin: auto;
+  padding: 0.5rem;
+}
+.user div img {
   display: block;
   margin-inline: auto;
   border: 4px solid #fff;

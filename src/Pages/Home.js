@@ -10,10 +10,10 @@ export default function Home() {
     <React.Fragment>
       <Hero />
       <Features />
-      <Products
+     <Products
         productsTitle={"Featured Products"}
         productsText={"Outstanding Collection of Featured Products"}
-      />
+      /> 
       <TemplateA
         templateTitle={"Special Offer!"}
         templateText={"UP TO 70% off - All T-shirts and Accessories"}

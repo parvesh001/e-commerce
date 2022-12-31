@@ -1,0 +1,6 @@
+.transparent-btn button a {
+  color: #fff;
+}
+.transparent-btn button:hover a {
+  color: #e63129 !important;
+}/*# sourceMappingURL=TransparentButton.module.css.map */

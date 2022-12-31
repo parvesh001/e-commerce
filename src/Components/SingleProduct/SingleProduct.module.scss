@@ -1,0 +1,26 @@
+.singleProductImg {
+  img {
+    border: 5px solid #fff;
+    object-fit: cover;
+  }
+}
+.product-details{
+    width: 100%;
+    @media only screen and(min-width:1000px) {
+        & {
+          position: relative;
+          margin-left: auto;
+          top: -65px;
+          width: 50%;
+        }
+      }
+    @media only screen and(min-width:1280px) {
+        & {
+          position: relative;
+          margin-left: auto;
+          top: -110px;
+          width: 50%;
+        }
+      }
+}
+

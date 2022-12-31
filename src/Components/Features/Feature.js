@@ -8,8 +8,7 @@ export default function Feature(props) {
         <img src={props.srcImg} className="card-img-top" alt={props.altText} />
         <div className="card-body">
           <p className="card-text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas
-            quidem.
+            {props.cardText}
           </p>
         </div>
       </div>
