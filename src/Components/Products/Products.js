@@ -1,9 +1,8 @@
 import React from "react";
 import Product from "./Product";
-import { Product__Data } from "./ProductsData";
 
 export default function Products(props) {
-  const Products = Product__Data.map((data) => {
+  const Products = props.products.map((data) => {
     return (
       <Product
         key={data.id}
@@ -15,15 +14,14 @@ export default function Products(props) {
       />
     );
   });
-  const productsClasses =
-    "px-md-5 px-2 row row-cols-1 row-cols-sm-3 row-cols-md-4 gx-0";
+  const productsClasses = props.productsClasses;
   return (
     <div className="mt-2 mt-md-5">
       <div className="text-center">
         <h1 className="text-light">{props.productsTitle}</h1>
         <span className="bg-light px-1 px-md-2">{props.productsText}</span>
       </div>
-      <div className={productsClasses}>{Products}</div>
+      <div className={`${"px-md-5"} ${productsClasses}`}>{Products}</div>
     </div>
   );
 }

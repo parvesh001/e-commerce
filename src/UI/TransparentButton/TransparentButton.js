@@ -7,6 +7,7 @@ export default function TransparentButton(props) {
       <button
         onClick={props.onClick}
         className={`${props.className} ${"btn btn-outline-light px-4 px-3"}`}
+        type={props.type}
       >
         {props.children}
       </button>

@@ -6,4 +6,7 @@
     background-position: right;
     margin-top:5rem;
     padding:2rem 5rem;
+    @media only screen and (max-width:420px){
+        padding: 1rem;
+    }
 }

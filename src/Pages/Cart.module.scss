@@ -1,0 +1,21 @@
+.empty-cart{
+    margin-top:5rem;
+    text-align: center;
+    color:#fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20rem;
+}
+.user-cart{
+    background-image: URL("/public/Images/Heros/your-shopping-cart-contains-5622049.jpg");
+    background-repeat: no-repeat;
+    background-size:cover;
+    height: 20rem;
+    background-position: center;
+    margin-top:5rem;
+    padding:2rem 5rem;
+    @media only screen and (max-width:420px){
+        padding: 1rem;
+    }
+}
