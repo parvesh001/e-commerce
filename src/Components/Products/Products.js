@@ -21,7 +21,7 @@ export default function Products(props) {
         <h1 className="text-light">{props.productsTitle}</h1>
         <span className="bg-light px-1 px-md-2">{props.productsText}</span>
       </div>
-      <div className={`${"px-md-5"} ${productsClasses}`}>{Products}</div>
+      <div className={`${"px-md-1 px-lg-5"} ${productsClasses}`}>{Products}</div>
     </div>
   );
 }

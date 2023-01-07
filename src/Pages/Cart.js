@@ -30,7 +30,9 @@ export default function Cart() {
   return (
     <>
       <div className={style["user-cart"]} />
+      <div className="overflow-auto">
       <CartTable />
+      </div>
       <CartTotal />
     </>
   );

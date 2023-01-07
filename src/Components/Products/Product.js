@@ -8,7 +8,7 @@ export default function Product(props) {
         navigate(`/shop/${props.id}`)
   }
   return (
-    <div className="p-2 p-md-3" onClick={productClickHandler}  style={{ cursor: "pointer" }}>
+    <div className="p-1 p-lg-3" onClick={productClickHandler}  style={{ cursor: "pointer" }}>
       <div className="card">
         <img src={props.srcImg} className="card-img-top" alt="product-img" />
         <div className="card-body">

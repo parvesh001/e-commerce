@@ -8,7 +8,7 @@ export default function Alert(props) {
   
   return (
     <div className={alertClasses}>
-      <p className="text-ligth mb-0">{props.alertMsg}</p>
+      <p className="text-ligth mb-0 text-nowrap">{props.alertMsg}</p>
     </div>
   );
 }
