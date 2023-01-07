@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import TransparentButton from "../../UI/TransparentButton/TransparentButton";
-import { cartSliceActions } from "../../Store";
-import { useDispatch } from "react-redux";
+import { cartSliceActions } from "../../Store/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
 import style from "./SingleProduct.module.scss";
+import { useNavigate } from "react-router-dom";
 
 export default function SingleProduct(props) {
+  const navigate = useNavigate();
+  const {isLoading,status} = useSelector(state=>state.indicators)
   const {id, srcImg, productBrand, productType, productPrice } = props;
   const [productQuantity, setProductQuantity] = useState("");
   const [productSize, setProductSize] = useState("Select Size");
@@ -34,7 +37,7 @@ export default function SingleProduct(props) {
       dispatch(addToCart(itemData));
     }
     setProductQuantity("");
-
+    
   };
 
   return (

@@ -10,8 +10,8 @@ export default function Pagination({ totalProducts, productsSeil, paginate }) {
   }
 
   const numberClickHandler = (number) => {
-    setSearchParams({ page: number });
-    paginate(searchParams.get("page"));
+    paginate(number);
+    setSearchParams({ page:number});
   };
 
   return (
@@ -24,9 +24,9 @@ export default function Pagination({ totalProducts, productsSeil, paginate }) {
               onClick={numberClickHandler.bind(null, number)}
               className="page-item"
             >
-              <a className="page-link" href="#" style={{color:"#e63129"}}>
+              <p className="page-link" style={{ color: "#e63129" }}>
                 {number}
-              </a>
+              </p>
             </li>
           );
         })}

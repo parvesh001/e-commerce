@@ -8,6 +8,7 @@ export default function TransparentButton(props) {
         onClick={props.onClick}
         className={`${props.className} ${"btn btn-outline-light px-4 px-3"}`}
         type={props.type}
+        disabled={props.disabled}
       >
         {props.children}
       </button>

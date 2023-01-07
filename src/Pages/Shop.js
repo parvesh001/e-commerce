@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import GoToTop from "../Components/GoTop/GoToTop";
 import Pagination from "../Components/Pagination/Pagination";
 import Products from "../Components/Products/Products";
 import { Product__Data } from "../Components/Products/ProductsData";
@@ -6,7 +7,7 @@ import style from "./Shop.module.scss";
 
 export default function Shop() {
   const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage, setProductsPerPage] = useState(6);
+  const productsPerPage = 6;
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
   const currentProducts = Product__Data.slice(
@@ -14,9 +15,9 @@ export default function Shop() {
     indexOfLastProduct
   );
 
-  const paginatePage=(number)=>{
-    setCurrentPage(number)
-  }
+  const paginatePage = (number) => {
+    setCurrentPage(number);
+  };
 
   return (
     <>
@@ -32,7 +33,12 @@ export default function Shop() {
         productsTitle={"Shop Now To Save Money"}
         productsText={"Connect with us & save money"}
       />
-      <Pagination totalProducts={Product__Data.length} productsSeil={productsPerPage} paginate={paginatePage}/>
+      <Pagination
+        totalProducts={Product__Data.length}
+        productsSeil={productsPerPage}
+        paginate={paginatePage}
+      />
+      <GoToTop/>
     </>
   );
 }

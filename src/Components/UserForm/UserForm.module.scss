@@ -1,0 +1,34 @@
+.user-form {
+  color: #fff;
+  input,
+  select {
+    background-color: transparent !important;
+    border: 1px solid #fff;
+    color: #fff;
+  }
+  input:focus,
+  select:focus {
+    background-color: transparent;
+    box-shadow: 0 0 4px #fff;
+    border: 1px solid #fff;
+    color: #fff;
+  }
+  ::placeholder {
+    color: rgba(215, 213, 213, 0.44);
+  }
+  select option {
+    background: transparent !important;
+    color: #e63129;
+  }
+
+  .formInput.inValid {
+    label {
+      color: rgb(141, 2, 2);
+    }
+    input {
+      border: 2px solid rgb(254, 0, 0);
+      box-shadow: 0 0 5px rgb(146, 6, 6);
+    }
+  }
+}
+

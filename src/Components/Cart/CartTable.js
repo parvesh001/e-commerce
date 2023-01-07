@@ -1,16 +1,17 @@
 import React from "react";
 import { GiCancel } from "react-icons/gi";
-import { useSelector,useDispatch } from "react-redux";
-import { cartSliceActions } from "../../Store";
+import { useSelector, useDispatch } from "react-redux";
+import { cartSliceActions } from "../../Store/cartSlice";
 
 export default function CartTable() {
   const cartData = useSelector((state) => state.cart.cartItems);
   const dispatch = useDispatch();
-  const {removeFromCart} = cartSliceActions;
+  const { removeFromCart } = cartSliceActions;
 
-  const productCancelHandler = (id)=>{
-          dispatch(removeFromCart(id))
-  }
+  const productCancelHandler = (product) => {
+    dispatch(removeFromCart({ id:product.id, size:product.size }));
+  };
+
   return (
     <table className="table mt-2 mt-md-5 container text-light text-center">
       <thead>
@@ -27,18 +28,22 @@ export default function CartTable() {
         {cartData.map((data) => {
           const productTotalPrice = data.productPrice * data.productQuantity;
           return (
-            <tr key={data.id}>
+            <tr key={`${data.id}${data.productSize}`}>
               <td className="pt-4">
-                <GiCancel onClick={productCancelHandler.bind(null,data.id)} style={{cursor:"pointer"}}/>
+                <GiCancel
+                  onClick={productCancelHandler.bind(null, {
+                    id: data.id,
+                    size: data.productSize,
+                  })}
+                  style={{ cursor: "pointer" }}
+                />
               </td>
               <td>
                 <img src={data.srcImg} alt="product" width="80px" />
               </td>
               <td className="pt-4">{data.productBrand}</td>
               <td className="pt-4">${data.productPrice}</td>
-              <td className="pt-4">
-                {data.productQuantity}
-              </td>
+              <td className="pt-4">{data.productQuantity}</td>
               <td className="pt-4">${productTotalPrice}</td>
             </tr>
           );
