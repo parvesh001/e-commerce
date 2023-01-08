@@ -7,6 +7,7 @@ export default function Products(props) {
       <Product
         key={data.id}
         srcImg={data.img}
+        altImg={data.altImg}
         title={data.title}
         subTitle={data.subTitle}
         price={data.price}

@@ -33,7 +33,7 @@ function App() {
       dispatch(sendingCartData(cartData));
     }
   }, [dispatch, cartData]);
-  console.log(cartData)
+ 
 
   return (
     <Layout>

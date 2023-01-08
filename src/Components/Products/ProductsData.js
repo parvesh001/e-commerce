@@ -3,6 +3,7 @@ export const Product__Data = [
   {
     id: "BBQA",
     img: "/Images/Products/1.jpg",
+    altImg:"/Images/Products/1(alt).jpg",
     title: "BBQ",
     subTitle: "Premium Huddie",
     price: "119",
@@ -10,6 +11,7 @@ export const Product__Data = [
   {
     id: "ADDIDAS",
     img: "/Images/Products/2.jpg",
+    altImg:"/Images/Products/2(alt).jpg",
     title: "ADDIDAS",
     subTitle: "Premium t'shirt",
     price: "99",
@@ -17,6 +19,7 @@ export const Product__Data = [
   {
     id: "RODDIE",
     img: "/Images/Products/3.jpg",
+    altImg:"/Images/Products/3(alt).jpg",
     title: "RODDIE",
     subTitle: "Premium t'shirt",
     price: "59",
@@ -24,6 +27,7 @@ export const Product__Data = [
   {
     id: "BeingHuman",
     img: "/Images/Products/4.jpg",
+    altImg:"/Images/Products/4(alt).jpg",
     title: "Being Human",
     subTitle: "Premium Huddie",
     price: "209",
@@ -31,6 +35,7 @@ export const Product__Data = [
   {
     id: "Rostar",
     img: "/Images/Products/5.jpg",
+    altImg:"/Images/Products/5(alt).jpg",
     title: "Rostar",
     subTitle: "Premium t-shirt",
     price: "109",
@@ -38,6 +43,7 @@ export const Product__Data = [
   {
     id: "CNT",
     img: "/Images/Products/6.jpg",
+    altImg:"/Images/Products/6(alt).jpg",
     title: "CNT",
     subTitle: "Premium t-shirt",
     price: "29",
@@ -45,6 +51,7 @@ export const Product__Data = [
   {
     id: "Zaccky",
     img: "/Images/Products/7.jpg",
+    altImg:"/Images/Products/7(alt).jpg",
     title: "Zaccky",
     subTitle: "Premium t-shirt",
     price: "99",
@@ -52,6 +59,7 @@ export const Product__Data = [
   {
     id: "Rock Star",
     img: "/Images/Products/8.jpg",
+    altImg:"/Images/Products/8(alt).jpg",
     title: "Rock Star",
     subTitle: "Premium t-shirt",
     price: "59",
@@ -59,6 +67,7 @@ export const Product__Data = [
   {
     id: "Zarra",
     img: "/Images/Products/9.jpg",
+    altImg:"/Images/Products/9(alt).jpg",
     title: "Zarra",
     subTitle: "Premium jacket",
     price: "299",
@@ -66,6 +75,7 @@ export const Product__Data = [
   {
     id: "Dry",
     img: "/Images/Products/10.jpg",
+    altImg:"/Images/Products/10(alt).jpg",
     title: "Dry",
     subTitle: "Premium t-shirt",
     price: "199",
@@ -73,6 +83,7 @@ export const Product__Data = [
   {
     id: "Pumma",
     img: "/Images/Products/11.jpg",
+    altImg:"/Images/Products/11(alt).jpg",
     title: "Pumma",
     subTitle: "Premium t-shirt",
     price: "99",
@@ -81,6 +92,7 @@ export const Product__Data = [
   {
     id: "Pumma2",
     img: "/Images/Products/12.jpg",
+    altImg:"/Images/Products/12(alt).jpg",
     title: "Pumma",
     subTitle: "Premium t-shirt",
     price: "99",
@@ -89,6 +101,7 @@ export const Product__Data = [
   {
     id: "Rock Star2",
     img: "/Images/Products/13.jpg",
+    altImg:"/Images/Products/13(alt).jpg",
     title: "Rock Star",
     subTitle: "Premium t-shirt",
     price: "59",
@@ -96,6 +109,7 @@ export const Product__Data = [
   {
     id: "ROSTARD",
     img: "/Images/Products/14.jpg",
+    altImg:"/Images/Products/14(alt).jpg",
     title: "ROSTARD",
     subTitle: "Premium t-shirt",
     price: "399",
@@ -103,6 +117,7 @@ export const Product__Data = [
   {
     id: "SIMLLY1",
     img: "/Images/Products/15.jpg",
+    altImg:"/Images/Products/15(alt).jpg",
     title: "SIMPLY",
     subTitle: "Premium t-shirt",
     price: "299",
@@ -110,6 +125,7 @@ export const Product__Data = [
   {
     id: "CA",
     img: "/Images/Products/16.jpg",
+    altImg:"/Images/Products/16(alt).jpg",
     title: "CA",
     subTitle: "Premium t-shirt",
     price: "199",
@@ -117,6 +133,7 @@ export const Product__Data = [
   {
     id: "SIMPLY2",
     img: "/Images/Products/17.jpg",
+    altImg:"/Images/Products/17(alt).jpg",
     title: "SIMPLY",
     subTitle: "Premium t-shirt",
     price: "299",
@@ -124,6 +141,7 @@ export const Product__Data = [
   {
     id: "LEVIS",
     img: "/Images/Products/18.jpg",
+    altImg:"/Images/Products/18(alt).jpg",
     title: "LEVIS",
     subTitle: "Premium t-shirt",
     price: "599",
@@ -131,6 +149,7 @@ export const Product__Data = [
   {
     id: "LIVELIGHT",
     img: "/Images/Products/19.jpg",
+    altImg:"/Images/Products/19(alt).jpg",
     title: "LIVELIGHT",
     subTitle: "Premium t-shirt",
     price: "199",
@@ -138,6 +157,7 @@ export const Product__Data = [
   {
     id: "SIMPLY3",
     img: "/Images/Products/20.jpg",
+    altImg:"/Images/Products/20(alt).jpg",
     title: "SIMPLY",
     subTitle: "Premium t-shirt",
     price: "299",
@@ -145,6 +165,7 @@ export const Product__Data = [
   {
     id: "SIMPLY4",
     img: "/Images/Products/21.jpg",
+    altImg:"/Images/Products/21(alt).jpg",
     title: "SIMPLY",
     subTitle: "Premium t-shirt",
     price: "299",
@@ -152,6 +173,7 @@ export const Product__Data = [
   {
     id: "ZARRA3",
     img: "/Images/Products/22.jpg",
+    altImg:"/Images/Products/22(alt).jpg",
     title: "ZARRA",
     subTitle: "Premium t-shirt",
     price: "399",
@@ -159,6 +181,7 @@ export const Product__Data = [
   {
     id: "ZARRA4",
     img: "/Images/Products/23.jpg",
+    altImg:"/Images/Products/23(alt).jpg",
     title: "ZARRA",
     subTitle: "Premium t-shirt",
     price: "499",
@@ -166,6 +189,7 @@ export const Product__Data = [
   {
     id: "SIMPLY5",
     img: "/Images/Products/24.jpg",
+    altImg:"/Images/Products/24(alt).jpg",
     title: "SIMPLY",
     subTitle: "Premium t-shirt",
     price: "199",
@@ -173,6 +197,7 @@ export const Product__Data = [
   {
     id: "SIMPLY6",
     img: "/Images/Products/25.jpg",
+    altImg:"/Images/Products/25(alt).jpg",
     title: "SIMPLY",
     subTitle: "Premium t-shirt",
     price: "199",
@@ -180,6 +205,7 @@ export const Product__Data = [
   {
     id: "SIMPLY7",
     img: "/Images/Products/26.jpg",
+    altImg:"/Images/Products/26(alt).jpg",
     title: "SIMPLY",
     subTitle: "Premium t-shirt",
     price: "199",
@@ -187,6 +213,7 @@ export const Product__Data = [
   {
     id: "SIMPLY8",
     img: "/Images/Products/27.jpg",
+    altImg:"/Images/Products/27(alt).jpg",
     title: "SIMPLY",
     subTitle: "Premium t-shirt",
     price: "199",
@@ -194,6 +221,7 @@ export const Product__Data = [
   {
     id: "ROSTARD3",
     img: "/Images/Products/28.jpg",
+    altImg:"/Images/Products/28(alt).jpg",
     title: "ROSTARD",
     subTitle: "Premium t-shirt",
     price: "399",
@@ -201,6 +229,7 @@ export const Product__Data = [
   {
     id: "ROSTARD2",
     img: "/Images/Products/29.jpg",
+    altImg:"/Images/Products/29(alt).jpg",
     title: "ROSTARD",
     subTitle: "Premium t-shirt",
     price: "399",
@@ -208,6 +237,7 @@ export const Product__Data = [
   {
     id: "ZACMA",
     img: "/Images/Products/30.jpg",
+    altImg:"/Images/Products/30(alt).jpg",
     title: "ZACMA",
     subTitle: "Premium t-shirt",
     price: "999",
