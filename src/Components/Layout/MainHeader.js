@@ -1,11 +1,19 @@
-import React from "react";
-import { NavLink, Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { NavLink, Link} from "react-router-dom";
 import "../../../node_modules/bootstrap/js/dist/offcanvas";
 import style from "./MainHeader.module.scss";
 import { BsFillCartCheckFill } from "react-icons/bs";
+import { FaUserAlt } from "react-icons/fa";
+import AuthContext from "../../Context/auth-context";
 
 
 export default function MainHeader() {
+   const authCtx =  useContext(AuthContext);
+   const profileClickHandler = ()=>{
+    if(!authCtx.isLogedin){
+      authCtx.setLocation("/user-profile")
+    }
+   }
   const linkClasses = (navData) =>
     navData.isActive
       ? `${"nav-link"} ${style.navLink} ${style.active}`
@@ -77,6 +85,11 @@ export default function MainHeader() {
                 <li className="nav-item">
                   <NavLink className={linkClasses} to="/cart">
                     <BsFillCartCheckFill className="fs-4"/>
+                  </NavLink>
+                </li>
+                <li className="nav-item" onClick={profileClickHandler}>
+                  <NavLink className={linkClasses} to={authCtx.isLogedin? "/user-profile":"/user-authentication"}>
+                    <FaUserAlt className="fs-5"/>
                   </NavLink>
                 </li>
               </ul>

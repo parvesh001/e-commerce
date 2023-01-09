@@ -2,19 +2,17 @@
   color: #fff;
   input,
   select {
-    background-color: transparent !important;
     border: 1px solid #fff;
-    color: #fff;
+    color: #e63129;
   }
   input:focus,
   select:focus {
-    background-color: transparent;
     box-shadow: 0 0 4px #fff;
     border: 1px solid #fff;
-    color: #fff;
+    color: #e63129;
   }
   ::placeholder {
-    color: rgba(215, 213, 213, 0.44);
+    color: #e632298a;
   }
   select option {
     background: transparent !important;
@@ -23,11 +21,12 @@
 
   .formInput.inValid {
     label {
-      color: rgb(141, 2, 2);
+      color: rgb(149, 0, 0);
     }
     input {
       border: 2px solid rgb(254, 0, 0);
       box-shadow: 0 0 5px rgb(146, 6, 6);
+      background-color: #ff999290;
     }
   }
 }

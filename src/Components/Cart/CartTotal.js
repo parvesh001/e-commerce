@@ -1,11 +1,22 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useContext } from "react";
+import { useNavigate,useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import TransparentButton from "../../UI/TransparentButton/TransparentButton";
+import AuthContext from "../../Context/auth-context";
 
 export default function CartTotal() {
+  const location = useLocation();
   const cartTotal = useSelector((state) => state.cart.totalPrice);
   const navigate = useNavigate();
+  const authCtx = useContext(AuthContext)
+  
+  const checkoutHandler = ()=>{
+    if(!authCtx.isLogedin){
+      authCtx.setLocation(location.pathname)
+      navigate("/user-authentication")
+    }
+  }
+  
   return (
     <div className="container">
       <table className="table text-light mt-2 mt-sm-3 mt-md-5">
@@ -30,7 +41,7 @@ export default function CartTotal() {
           </tr>
         </tbody>
       </table>
-      <TransparentButton onClick={() => navigate("/user-details")}>
+      <TransparentButton onClick={checkoutHandler}>
         Proceed to Checkout
       </TransparentButton>
     </div>

@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
+import { useDispatch } from "react-redux";
+import { userSliceActions } from "../../Store/user";
 import useInput from "../../Hooks/use-input";
-import TransparentButton from "../../UI/TransparentButton/TransparentButton";
+import TransparentButton from "../TransparentButton/TransparentButton";
 import style from "./UserForm.module.scss";
+import AuthContext from "../../Context/auth-context";
+import { useNavigate } from "react-router-dom";
 
-export default function UserForm(props) {
+export default function UserForm() {
+ const authCtx = useContext(AuthContext)
+ const navigate = useNavigate()
+  const dispatch = useDispatch();
   const {
     inputValue: nameValue,
     inputIsValid: nameIsValid,
@@ -76,22 +83,28 @@ export default function UserForm(props) {
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
-    if (!formIsValid) return;
-    props.onSubmit({
-        name:nameValue,
-        email:emailValue,
-        address:addressValue,
-        addressB:addressBValue,
-        city:cityValue,
-        state:stateValue,
-        zip:zipValue
-    })
-    nameReset()
-    emailReset()
-    addressReset()
-    addressBReset()
-    cityReset()
-    zipReset()
+
+    dispatch(
+      userSliceActions.setUser({
+        name: nameValue,
+        email: emailValue,
+        address: addressValue,
+        addressB: addressBValue,
+        city: cityValue,
+        state: stateValue,
+        zip: zipValue,
+      })
+    );
+
+   setTimeout(()=>{
+    navigate(authCtx.location)
+   },2000)
+    nameReset();
+    emailReset();
+    addressReset();
+    addressBReset();
+    cityReset();
+    zipReset();
   };
 
   const nameInputClasses = nameIsInvalid
@@ -220,7 +233,7 @@ export default function UserForm(props) {
 
         <div className="col-12">
           <TransparentButton type="submit" disabled={!formIsValid}>
-            {props.btnText}
+            Submit
           </TransparentButton>
         </div>
       </form>

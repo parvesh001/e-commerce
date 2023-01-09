@@ -1,0 +1,41 @@
+.authForm {
+  width: 25rem;
+  max-width: 90%;
+  input{
+    color:#e63129
+  }
+  label,h4{
+    color:#fff
+  }
+  form{
+    padding: .5rem;
+  }
+  span {
+    color: #ffffff6f;
+  }
+  input:focus {
+    box-shadow: 0 0 4px #fff;
+    border: 1px solid #fff;
+    color: #e63129;
+  }
+  .mode {
+    text-align: center;
+    color: #ffffff6f;
+    margin-top: 10px;
+    span{
+      cursor: pointer;
+    }
+  }
+
+  .formInput.invalid {
+    label {
+      color: rgb(149, 0, 0);
+    }
+    input {
+      border: 2px solid rgb(254, 0, 0);
+      box-shadow: 0 0 5px rgb(146, 6, 6);
+      background-color: #ff999290;
+    }
+  }
+
+}
