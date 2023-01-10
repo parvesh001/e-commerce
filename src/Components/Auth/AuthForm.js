@@ -62,7 +62,6 @@ export default function AuthForm(props) {
       },
     })
       .then((res) => {
-        dispatch(indicatorActions.setLoading(false));
         if (!res.ok) {
           return res.json().then((data) => {
             throw new Error(data.error.message);
@@ -72,6 +71,7 @@ export default function AuthForm(props) {
         }
       })
       .then((data) => {
+        dispatch(indicatorActions.setLoading(false));
         dispatch(
           indicatorActions.setAlerts({
             show: true,
@@ -82,10 +82,10 @@ export default function AuthForm(props) {
           })
         );
         if (isLogin) {
-          authCtx.login(data.idToken);
-          authCtx.signup(true)
           setTimeout(()=>{
+            authCtx.login(data.idToken);
             navigate(authCtx.location);
+            authCtx.signup(true)
           },1000)
         } else {
           setTimeout(()=>{
@@ -94,10 +94,17 @@ export default function AuthForm(props) {
           },1200)
         }
         setTimeout(() => {
-          dispatch(indicatorActions.setShow());
+          dispatch(
+            indicatorActions.setAlerts({
+              show: false,
+              status: null,
+              message: null
+            })
+          );
         }, 1000);
       })
       .catch((error) => {
+        dispatch(indicatorActions.setLoading(false));
         dispatch(
           indicatorActions.setAlerts({
             show: true,
@@ -106,7 +113,13 @@ export default function AuthForm(props) {
           })
         );
         setTimeout(() => {
-          dispatch(indicatorActions.setShow());
+          dispatch(
+            indicatorActions.setAlerts({
+              show: false,
+              status: null,
+              message: null
+            })
+          );
         }, 1000);
       });
 

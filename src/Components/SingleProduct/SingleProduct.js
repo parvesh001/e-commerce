@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import TransparentButton from "../../UI/TransparentButton/TransparentButton";
 import { cartSliceActions } from "../../Store/cartSlice";
-import { useDispatch} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import style from "./SingleProduct.module.scss";
 import { useNavigate } from "react-router-dom";
 
 export default function SingleProduct(props) {
-  const navigate = useNavigate()
-  const {id, srcImg, productBrand, productType, productPrice } = props;
+  const navigate = useNavigate();
+  const { id, srcImg, productBrand, productType, productPrice } = props;
   const [productQuantity, setProductQuantity] = useState("");
   const [productSize, setProductSize] = useState("Select Size");
-  
+  const { status } = useSelector((state) => state.indicators);
+
   const dispatch = useDispatch();
   const { addToCart } = cartSliceActions;
 
@@ -29,18 +30,19 @@ export default function SingleProduct(props) {
         srcImg,
         productBrand,
         productPrice,
-        productQuantity:+productQuantity,
+        productQuantity: +productQuantity,
         productSize,
       };
       dispatch(addToCart(itemData));
     }
     setProductQuantity("");
-    setTimeout(()=>{
-       navigate("/cart")
-    },1500)
   };
 
- 
+  if (status === "successful") {
+    setTimeout(()=>{
+      navigate("/cart");
+    },1000)
+  }
 
   return (
     <div className="container">

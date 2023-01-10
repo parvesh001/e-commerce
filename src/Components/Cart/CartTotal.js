@@ -11,6 +11,7 @@ export default function CartTotal() {
   const cartTotal = useSelector((state) => state.cart.totalPrice);
   const { cartItems, totalPrice } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.user);
+  const { status } = useSelector((state) => state.indicators);
   const navigate = useNavigate();
   const authCtx = useContext(AuthContext);
 
@@ -18,20 +19,22 @@ export default function CartTotal() {
     if (!authCtx.isLogedin) {
       authCtx.setLocation(location.pathname);
       navigate("/user-authentication");
+    } else {
+      dispatch(
+        checkingOut({
+          customer: user,
+          orderedItems: cartItems,
+          total: totalPrice,
+        })
+      );
     }
+  };
 
-    dispatch(
-      checkingOut({
-        customer: user,
-        orderedItems: cartItems,
-        total: totalPrice,
-      })
-    );
-    
+  if (status === "successful") {
     setTimeout(() => {
       navigate("/home");
     }, 1000);
-  };
+  }
 
   return (
     <div className="container">

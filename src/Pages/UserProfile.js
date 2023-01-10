@@ -21,7 +21,6 @@ export default function UserProfile() {
 
       <div style={{ marginTop: "6rem" }} className="container pb-2 pt-md-4">
         <h2 className="text-center text-light">USER PROFILE</h2>
-        {status === "successful" && (
           <div>
             <User />
             <TransparentButton
@@ -31,7 +30,6 @@ export default function UserProfile() {
               Log Out
             </TransparentButton>
           </div>
-        )}
       </div>
     </React.Fragment>
   );

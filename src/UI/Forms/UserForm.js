@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { userSliceActions } from "../../Store/user";
 import useInput from "../../Hooks/use-input";
 import TransparentButton from "../TransparentButton/TransparentButton";
@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 export default function UserForm(props) {
   const authCtx = useContext(AuthContext);
   const navigate = useNavigate();
+  const { status } = useSelector((state) => state.indicators);
   const dispatch = useDispatch();
   const {
     inputValue: nameValue,
@@ -81,9 +82,8 @@ export default function UserForm(props) {
     formIsValid = true;
   }
 
-  const formSubmitHandler = async(event) => {
+  const formSubmitHandler = (event) => {
     event.preventDefault();
-  
     dispatch(
       userSliceActions.setUser({
         name: nameValue,
@@ -95,11 +95,6 @@ export default function UserForm(props) {
         zip: zipValue,
       })
     );
-    setTimeout(() => {
-      authCtx.login(props.token);
-      navigate(authCtx.location);
-    }, 1500);
-
     nameReset();
     emailReset();
     addressReset();
@@ -107,6 +102,13 @@ export default function UserForm(props) {
     cityReset();
     zipReset();
   };
+
+  if (status === "successful") {
+    setTimeout(()=>{
+      authCtx.login(props.token);
+      navigate(authCtx.location);
+    },1000)
+  }
 
   const nameInputClasses = nameIsInvalid
     ? `${"col-md-6"} ${style.formInput} ${style.inValid}`

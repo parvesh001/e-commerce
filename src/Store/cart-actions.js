@@ -22,10 +22,12 @@ export const sendingCartData = (cartData) => {
             },
           }
         );
-        dispatch(indicatorActions.setLoading(false));
+        
         if (!response.ok) {
           throw new Error("Failed to send data!");
         }
+
+        dispatch(indicatorActions.setLoading(false));
         dispatch(
           indicatorActions.setAlerts({
             show: true,
@@ -34,9 +36,16 @@ export const sendingCartData = (cartData) => {
           })
         );
         setTimeout(() => {
-          dispatch(indicatorActions.setShow());
+          dispatch(
+            indicatorActions.setAlerts({
+              show: false,
+              status: null,
+              message: null,
+            })
+          );
         }, 1000);
       } catch (error) {
+        dispatch(indicatorActions.setLoading(false));
         dispatch(
           indicatorActions.setAlerts({
             show: true,
@@ -45,7 +54,13 @@ export const sendingCartData = (cartData) => {
           })
         );
         setTimeout(() => {
-          dispatch(indicatorActions.setShow());
+          dispatch(
+            indicatorActions.setAlerts({
+              show: false,
+              status: null,
+              message: null,
+            })
+          );
         }, 1000);
       }
     };
@@ -76,7 +91,13 @@ export const fetchingCartData = () => {
           })
         );
         setTimeout(() => {
-          dispatch(indicatorActions.setShow());
+          dispatch(
+            indicatorActions.setAlerts({
+              show: false,
+              status: null,
+              message: null,
+            })
+          );
         }, 1000);
       }
     };
@@ -103,7 +124,7 @@ export const checkingOut = (info) => {
       dispatch(indicatorActions.setLoading(true))
       try {
         const response = await fetch(
-          "https://e-commerce-eb5e0-default-rtdb.firebaseio.com/placedOrder.jso",
+          "https://e-commerce-eb5e0-default-rtdb.firebaseio.com/placedOrder.json",
           {
             method: "PUT",
             body: JSON.stringify(info),
@@ -112,27 +133,37 @@ export const checkingOut = (info) => {
             },
           }
         );
-        dispatch(indicatorActions.setLoading(false))
+        
         if (!response.ok) {
           throw new Error("Failed to Checkout!");
         }
+        dispatch(indicatorActions.setLoading(false))
         dispatch(indicatorActions.setAlerts({
           show:true,
           status:"successful",
           message:"Order Placed Successfully"
         }))
         setTimeout(()=>{
-          dispatch(indicatorActions.setShow())
+          dispatch(indicatorActions.setAlerts({
+            show:false,
+            status:null,
+            message:null
+          }))
           dispatch(cartSliceActions.cartReset());
         },1000)
       } catch (error) {
+        dispatch(indicatorActions.setLoading(false))
         dispatch(indicatorActions.setAlerts({
           show:true,
           status:"unsuccessful",
           message:"Order failed to Place"
         }))
         setTimeout(()=>{
-          dispatch(indicatorActions.setShow())
+          dispatch(indicatorActions.setAlerts({
+            show:false,
+            status:null,
+            message:null
+          }))
         },1000)
       }
     };

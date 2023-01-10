@@ -17,9 +17,6 @@ const indicatorSlice = createSlice({
         state.show = action.payload.show
         state.status = action.payload.status
         state.message = action.payload.message
-    },
-    setShow(state){
-        state.show = false
     }
   }
 });

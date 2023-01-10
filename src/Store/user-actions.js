@@ -16,10 +16,11 @@ export const settingUser = (user) => {
             },
           }
         );
-        dispatch(indicatorActions.setLoading(false));
+        
         if (!response.ok) {
           throw new Error("failed to store user information!!");
         }
+        dispatch(indicatorActions.setLoading(false));
         dispatch(
           indicatorActions.setAlerts({
             show: true,
@@ -28,9 +29,16 @@ export const settingUser = (user) => {
           })
         );
         setTimeout(() => {
-          dispatch(indicatorActions.setShow());
+          dispatch(
+            indicatorActions.setAlerts({
+              show: false,
+              status: null,
+              message: null,
+            })
+          );
         }, 1000);
       } catch (error) {
+        dispatch(indicatorActions.setLoading(false));
         dispatch(
           indicatorActions.setAlerts({
             show: true,
@@ -39,7 +47,13 @@ export const settingUser = (user) => {
           })
         );
         setTimeout(() => {
-          dispatch(indicatorActions.setShow());
+          dispatch(
+            indicatorActions.setAlerts({
+              show: false,
+              status: null,
+              message: null,
+            })
+          );
         }, 1000);
       }
     };
@@ -55,23 +69,15 @@ export const gettingUser = () => {
         const response = await fetch(
           "https://e-commerce-eb5e0-default-rtdb.firebaseio.com/user.json"
         );
-        dispatch(indicatorActions.setLoading(false));
+        
         if (!response.ok) {
           throw new Error("something went wrong!!");
         }
-        dispatch(
-          indicatorActions.setAlerts({
-            show: true,
-            status: "successful",
-            message: "User Data Sent Successfully",
-          })
-        );
-        setTimeout(() => {
-          dispatch(indicatorActions.setShow());
-        }, 1000);
+        dispatch(indicatorActions.setLoading(false));
         const data = await response.json();
         return data;
       } catch (error) {
+        dispatch(indicatorActions.setLoading(false));
         dispatch(
           indicatorActions.setAlerts({
             show: true,
@@ -80,7 +86,13 @@ export const gettingUser = () => {
           })
         );
         setTimeout(() => {
-          dispatch(indicatorActions.setShow());
+          dispatch(
+            indicatorActions.setAlerts({
+              show: false,
+              status: null,
+              message: null,
+            })
+          );
         }, 1000);
       }
     };
