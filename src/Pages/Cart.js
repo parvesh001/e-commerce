@@ -4,20 +4,13 @@ import style from "./Cart.module.scss";
 import { useSelector } from "react-redux";
 import CartTotal from "../Components/Cart/CartTotal";
 import Model from "../UI/Model/Model";
+import Alert from "../UI/Alert/Alert";
 
 export default function Cart() {
   const cartItems = useSelector((state) => state.cart.cartItems);
-  const { isLoading } = useSelector((state) => state.indicators);
-
-  if (isLoading) {
-    return (
-      <Model>
-        <div className="spinner-border" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </div>
-      </Model>
-    );
-  }
+  const { isLoading, show, message, status } = useSelector(
+    (state) => state.indicators
+  );
 
   if (!isLoading && !cartItems.length) {
     return (
@@ -28,12 +21,19 @@ export default function Cart() {
   }
 
   return (
-    <>
-      <div className={style["user-cart"]} />
+    <React.Fragment>
+      <div className={style["user-cart"]}>
+      {show && <Alert className={status} alertMsg={message} />}
+      {isLoading && <Model>
+        <div className="spinner-border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      </Model>}
+      </div>
       <div className="overflow-auto">
-      <CartTable />
+        <CartTable />
       </div>
       <CartTotal />
-    </>
+    </React.Fragment>
   );
 }

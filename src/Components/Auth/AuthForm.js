@@ -5,7 +5,7 @@ import { indicatorActions } from "../../Store/indicators";
 import useInput from "../../Hooks/use-input";
 import TransparentButton from "../../UI/TransparentButton/TransparentButton";
 import style from "./AuthForm.module.scss";
-import { useDispatch } from "react-redux";
+import { useDispatch } from "react-redux"; 
 
 export default function AuthForm(props) {
   const dispatch = useDispatch();
@@ -72,7 +72,6 @@ export default function AuthForm(props) {
         }
       })
       .then((data) => {
-        authCtx.login(data.idToken);
         dispatch(
           indicatorActions.setAlerts({
             show: true,
@@ -82,13 +81,20 @@ export default function AuthForm(props) {
               : "Created Account Successfully",
           })
         );
+        if (isLogin) {
+          authCtx.login(data.idToken);
+          authCtx.signup(true)
+          setTimeout(()=>{
+            navigate(authCtx.location);
+          },1000)
+        } else {
+          setTimeout(()=>{
+            authCtx.signup(true)
+            props.getToken(data.idToken)
+          },1200)
+        }
         setTimeout(() => {
           dispatch(indicatorActions.setShow());
-          if (isLogin) {
-            navigate(authCtx.location);
-          } else {
-            props.showAuth(false);
-          }
         }, 1000);
       })
       .catch((error) => {

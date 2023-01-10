@@ -1,18 +1,20 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useSelector } from "react-redux";
 import AuthForm from "../Components/Auth/AuthForm";
 import UserForm from "../UI/Forms/UserForm";
 import Model from "../UI/Model/Model";
 import Alert from "../UI/Alert/Alert";
+import AuthContext from "../Context/auth-context";
 
 export default function Authentication() {
-  const [showAuth, setShowAuth] = useState(true);
+  const authCtx = useContext(AuthContext);
+  const [token, setToken] = useState("");
   const { isLoading, show, status, message } = useSelector(
     (state) => state.indicators
   );
 
-  const showAuthHandler = (boolean) => {
-    setShowAuth(boolean);
+  const tokenHandler = (token) => {
+    setToken(token);
   };
 
   return (
@@ -29,8 +31,10 @@ export default function Authentication() {
         style={{ height: "100vh" }}
       >
         {show && <Alert className={status} alertMsg={message} />}
-        {!showAuth && <UserForm />}
-        {showAuth && <AuthForm showAuth={showAuthHandler} />}
+        {authCtx.isSignedup && <UserForm token={token} />}
+        {!authCtx.isSignedup && (
+          <AuthForm getToken={tokenHandler} />
+        )}
       </div>
     </React.Fragment>
   );

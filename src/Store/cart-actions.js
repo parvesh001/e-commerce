@@ -22,24 +22,21 @@ export const sendingCartData = (cartData) => {
             },
           }
         );
-
+        dispatch(indicatorActions.setLoading(false));
         if (!response.ok) {
           throw new Error("Failed to send data!");
         }
-
-        dispatch(indicatorActions.setLoading(false));
         dispatch(
           indicatorActions.setAlerts({
             show: true,
             status: "successful",
-            message: "data sent successfully",
+            message: "Added to cart",
           })
         );
         setTimeout(() => {
           dispatch(indicatorActions.setShow());
         }, 1000);
       } catch (error) {
-        dispatch(indicatorActions.setLoading(false));
         dispatch(
           indicatorActions.setAlerts({
             show: true,
@@ -64,14 +61,23 @@ export const fetchingCartData = () => {
         const response = await fetch(
           "https://e-commerce-eb5e0-default-rtdb.firebaseio.com/cart.json"
         );
+        dispatch(indicatorActions.setLoading(false));
         if (!response.ok) {
           throw new Error("Failed to fetch cart data");
         }
         const data = await response.json();
         return data;
       } catch (error) {
-        dispatch(indicatorActions.setLoading(false));
-        alert(error.message);
+        dispatch(
+          indicatorActions.setAlerts({
+            show: true,
+            status: "unsuccessful",
+            message: "Failed to load cart data!",
+          })
+        );
+        setTimeout(() => {
+          dispatch(indicatorActions.setShow());
+        }, 1000);
       }
     };
 
@@ -88,7 +94,6 @@ export const fetchingCartData = () => {
         totalPrice,
       })
     );
-    dispatch(indicatorActions.setLoading(false));
   };
 };
 
@@ -98,7 +103,7 @@ export const checkingOut = (info) => {
       dispatch(indicatorActions.setLoading(true))
       try {
         const response = await fetch(
-          "https://e-commerce-eb5e0-default-rtdb.firebaseio.com/placedOrder.json",
+          "https://e-commerce-eb5e0-default-rtdb.firebaseio.com/placedOrder.jso",
           {
             method: "PUT",
             body: JSON.stringify(info),
@@ -107,10 +112,10 @@ export const checkingOut = (info) => {
             },
           }
         );
+        dispatch(indicatorActions.setLoading(false))
         if (!response.ok) {
           throw new Error("Failed to Checkout!");
         }
-        dispatch(indicatorActions.setLoading(false))
         dispatch(indicatorActions.setAlerts({
           show:true,
           status:"successful",
@@ -121,7 +126,6 @@ export const checkingOut = (info) => {
           dispatch(cartSliceActions.cartReset());
         },1000)
       } catch (error) {
-        dispatch(indicatorActions.setLoading(false))
         dispatch(indicatorActions.setAlerts({
           show:true,
           status:"unsuccessful",

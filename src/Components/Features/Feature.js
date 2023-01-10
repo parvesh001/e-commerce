@@ -6,7 +6,7 @@ import "react-lazy-load-image-component/src/effects/blur.css"
 export default function Feature(props) {
   return (
     <div className="p-2 p-sm-3 d-flex justify-content-center">
-      <div className={`${style["feature-container"]} ${"card"}`}>
+      <div className={`${style["feature-container"]} ${"card shadow"}`}>
         <LazyLoadImage src={props.srcImg} className="card-img-top" placeholderSrc={props.altImg} effect="blur" alt={props.altText} />
         <div className="card-body">
           <p className="card-text">

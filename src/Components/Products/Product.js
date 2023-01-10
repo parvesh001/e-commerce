@@ -10,8 +10,8 @@ export default function Product(props) {
         navigate(`/shop/${props.id}`)
   }
   return (
-    <div className="p-1 p-lg-3" onClick={productClickHandler}  style={{ cursor: "pointer" }}>
-      <div className="card">
+    <div className="p-1 p-md-3 p-lg-4" onClick={productClickHandler}  style={{ cursor: "pointer" }}>
+      <div className="card shadow">
         <LazyLoadImage src={props.srcImg} className="card-img-top" placeholderSrc={props.altImg} effect="blur" alt="product-img" />
         <div className="card-body">
           <h4 className="card-title mb-0 text-nowrap">{props.title}</h4>

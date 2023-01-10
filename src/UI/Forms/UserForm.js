@@ -7,9 +7,9 @@ import style from "./UserForm.module.scss";
 import AuthContext from "../../Context/auth-context";
 import { useNavigate } from "react-router-dom";
 
-export default function UserForm() {
- const authCtx = useContext(AuthContext)
- const navigate = useNavigate()
+export default function UserForm(props) {
+  const authCtx = useContext(AuthContext);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const {
     inputValue: nameValue,
@@ -81,9 +81,9 @@ export default function UserForm() {
     formIsValid = true;
   }
 
-  const formSubmitHandler = (event) => {
+  const formSubmitHandler = async(event) => {
     event.preventDefault();
-
+  
     dispatch(
       userSliceActions.setUser({
         name: nameValue,
@@ -95,10 +95,11 @@ export default function UserForm() {
         zip: zipValue,
       })
     );
+    setTimeout(() => {
+      authCtx.login(props.token);
+      navigate(authCtx.location);
+    }, 1500);
 
-   setTimeout(()=>{
-    navigate(authCtx.location)
-   },2000)
     nameReset();
     emailReset();
     addressReset();
@@ -131,6 +132,11 @@ export default function UserForm() {
 
   return (
     <div className={`${style["user-form"]} ${"container"}`}>
+      <div className="d-flex justify-content-center">
+        <h4 className="text-center d-inline-block mb-5">
+          PROVIDE MORE DETAILS
+        </h4>
+      </div>
       <form className="row g-3" onSubmit={formSubmitHandler}>
         <div className={nameInputClasses}>
           <label htmlFor="inputName" className="form-label">

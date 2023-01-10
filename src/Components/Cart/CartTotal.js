@@ -1,22 +1,38 @@
 import React, { useContext } from "react";
-import { useNavigate,useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import TransparentButton from "../../UI/TransparentButton/TransparentButton";
 import AuthContext from "../../Context/auth-context";
+import { checkingOut } from "../../Store/cart-actions";
 
 export default function CartTotal() {
   const location = useLocation();
+  const dispatch = useDispatch();
   const cartTotal = useSelector((state) => state.cart.totalPrice);
+  const { cartItems, totalPrice } = useSelector((state) => state.cart);
+  const { user } = useSelector((state) => state.user);
   const navigate = useNavigate();
-  const authCtx = useContext(AuthContext)
-  
-  const checkoutHandler = ()=>{
-    if(!authCtx.isLogedin){
-      authCtx.setLocation(location.pathname)
-      navigate("/user-authentication")
+  const authCtx = useContext(AuthContext);
+
+  const checkoutHandler = () => {
+    if (!authCtx.isLogedin) {
+      authCtx.setLocation(location.pathname);
+      navigate("/user-authentication");
     }
-  }
-  
+
+    dispatch(
+      checkingOut({
+        customer: user,
+        orderedItems: cartItems,
+        total: totalPrice,
+      })
+    );
+    
+    setTimeout(() => {
+      navigate("/home");
+    }, 1000);
+  };
+
   return (
     <div className="container">
       <table className="table text-light mt-2 mt-sm-3 mt-md-5">

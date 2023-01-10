@@ -32,13 +32,12 @@ export default function SingleProduct(props) {
         productQuantity:+productQuantity,
         productSize,
       };
-      
       dispatch(addToCart(itemData));
     }
     setProductQuantity("");
     setTimeout(()=>{
        navigate("/cart")
-    },1000)
+    },1500)
   };
 
  

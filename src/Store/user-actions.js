@@ -59,6 +59,16 @@ export const gettingUser = () => {
         if (!response.ok) {
           throw new Error("something went wrong!!");
         }
+        dispatch(
+          indicatorActions.setAlerts({
+            show: true,
+            status: "successful",
+            message: "User Data Sent Successfully",
+          })
+        );
+        setTimeout(() => {
+          dispatch(indicatorActions.setShow());
+        }, 1000);
         const data = await response.json();
         return data;
       } catch (error) {

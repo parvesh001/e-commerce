@@ -45,7 +45,8 @@ const cartSlice = createSlice({
     },
     cartReset(state){
       state.cartItems = [];
-      state.totalPrice = 0
+      state.totalPrice = 0;
+      state.change = true;
     }
   },
 });
