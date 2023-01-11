@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useSelector } from "react-redux";
-import AuthForm from "../Components/Auth/AuthForm";
-import UserForm from "../UI/Forms/UserForm";
+import AuthForm from "../Components/Forms/AuthForm";
+import UserForm from "../Components/Forms/UserForm";
 import Model from "../UI/Model/Model";
 import Alert from "../UI/Alert/Alert";
 import AuthContext from "../Context/auth-context";

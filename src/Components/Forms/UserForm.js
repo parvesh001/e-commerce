@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userSliceActions } from "../../Store/user";
 import useInput from "../../Hooks/use-input";
-import TransparentButton from "../TransparentButton/TransparentButton";
+import TransparentButton from "../../UI/TransparentButton/TransparentButton";
 import style from "./UserForm.module.scss";
 import AuthContext from "../../Context/auth-context";
 import { useNavigate } from "react-router-dom";

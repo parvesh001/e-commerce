@@ -9,7 +9,7 @@ export default function Feature(props) {
       <div className={`${style["feature-container"]} ${"card shadow"}`}>
         <LazyLoadImage src={props.srcImg} className="card-img-top" placeholderSrc={props.altImg} effect="blur" alt={props.altText} />
         <div className="card-body">
-          <p className="card-text">
+          <p className="card-text text-light text-nowrap text-center px-2 py-1 rounded" style={{backgroundColor:"#e63129"}}>
             {props.cardText}
           </p>
         </div>

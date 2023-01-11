@@ -6,7 +6,10 @@ import Hero from "../Components/Hero/Hero";
 import Products from "../Components/Products/Products";
 import TemplateA from "../Components/Templates/TemplateA";
 
+
+
 export default function Home() {
+
   return (
     <React.Fragment>
       <Hero />

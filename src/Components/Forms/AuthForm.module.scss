@@ -1,14 +1,15 @@
 .authForm {
   width: 25rem;
   max-width: 90%;
-  input{
-    color:#e63129
+  input {
+    color: #e63129;
   }
-  label,h4{
-    color:#fff
+  label,
+  h4 {
+    color: #fff;
   }
-  form{
-    padding: .5rem;
+  form {
+    padding: 0.5rem;
   }
   span {
     color: #ffffff6f;
@@ -22,7 +23,7 @@
     text-align: center;
     color: #ffffff6f;
     margin-top: 10px;
-    span{
+    span {
       cursor: pointer;
     }
   }
@@ -38,4 +39,9 @@
     }
   }
 
+  /* Change autocomplete styles in WebKit */
+  input:-webkit-autofill,
+  select:-webkit-autofill {
+    -webkit-text-fill-color: #e63129;
+  }
 }

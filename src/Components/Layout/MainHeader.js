@@ -83,6 +83,11 @@ export default function MainHeader() {
                   </NavLink>
                 </li>
                 <li className="nav-item">
+                  <NavLink className={linkClasses} to="/user-orders">
+                    Orders
+                  </NavLink>
+                </li>
+                <li className="nav-item">
                   <NavLink className={linkClasses} to="/cart">
                     <BsFillCartCheckFill className="fs-4"/>
                   </NavLink>

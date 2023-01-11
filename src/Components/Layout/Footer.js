@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import AuthContext from "../../Context/auth-context";
 import style from "./Footer.module.scss";
 
 export default function Footer() {
+ const authCtx =  useContext(AuthContext)
   const containerClasses = `${"container-fluid px-2 px-sm-4 px-md-5 py-2 py-md-5 mt-2 mt-md-5 bg-light"} ${
     style["footer"]
   }`;
@@ -29,7 +31,7 @@ export default function Footer() {
           <h6>About</h6>
           <ul>
             <li>
-              <Link>About Us</Link>
+              <Link to="/about">About Us</Link>
             </li>
             <li>
               <Link>Delivery Information</Link>
@@ -41,7 +43,7 @@ export default function Footer() {
               <Link>Terms & Conditions</Link>
             </li>
             <li>
-              <Link>Contact Us</Link>
+              <Link to="/contact">Contact Us</Link>
             </li>
           </ul>
         </div>
@@ -49,10 +51,10 @@ export default function Footer() {
           <h6>My Account</h6>
           <ul>
             <li>
-              <Link>Sign In</Link>
+              <Link style={{cursor:authCtx.isLogedin?"not-allowed":"pointer",color:authCtx.isLogedin?"#e632295e":"#e63129"}} to={!authCtx.isLogedin?"/user-authentication":authCtx.location}>Sign In</Link>
             </li>
             <li>
-              <Link>View Cart</Link>
+              <Link to="/cart">View Cart</Link>
             </li>
             <li>
               <Link>Trace Order</Link>

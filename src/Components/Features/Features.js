@@ -5,44 +5,44 @@ const DUMMY_DATA = [
   {
     id: "f1",
     imgSrc: "/Images/Features/feel-happy.jpg",
-    altImg:"/Images/Features/feel-happy(alt).jpg",
+    altImg: "/Images/Features/feel-happy(alt).jpg",
     altText: "feature-one",
-    cardText:"Be Our Happy Customer"
+    cardText: "Happy Customer",
   },
   {
     id: "f2",
     imgSrc: "/Images/Features/online-order.jpg",
-    altImg:"/Images/Features/online-order(alt).jpg",
+    altImg: "/Images/Features/online-order(alt).jpg",
     altText: "feature-two",
-    cardText:"Place Online Order"
+    cardText: "Online Order",
   },
   {
     id: "f3",
     imgSrc: "/Images/Features/open24hours.jpg",
-    altImg:"/Images/Features/open24hours(alt).jpg",
+    altImg: "/Images/Features/open24hours(alt).jpg",
     altText: "feature-three",
-    cardText:"Leverage 24hrs service facility"
+    cardText: "24hrs facility",
   },
   {
     id: "f4",
     imgSrc: "/Images/Features/free-shipping.jpg",
-    altImg:"/Images/Features/free-shipping(alt).jpg",
+    altImg: "/Images/Features/free-shipping(alt).jpg",
     altText: "feature-four",
-    cardText:"We are providing free-shipping"
+    cardText: "Free-shipping",
   },
   {
     id: "f5",
     imgSrc: "/Images/Features/promotion.jpg",
-    altImg:"/Images/Features/promotion(alt).jpg",
+    altImg: "/Images/Features/promotion(alt).jpg",
     altText: "feature-five",
-    cardText:"We are here for your promotion"
+    cardText: "Your Promotion",
   },
   {
     id: "f6",
     imgSrc: "/Images/Features/save-money.jpg",
-    altImg:"/Images/Features/save-money(alt).jpg",
+    altImg: "/Images/Features/save-money(alt).jpg",
     altText: "feature-six",
-    cardText:"Connect with us and save your money"
+    cardText: "Save Your Money",
   },
 ];
 
@@ -58,12 +58,14 @@ const features = DUMMY_DATA.map((featureData) => {
   );
 });
 
-const featuresContainerClasses = "mt-2 mt-md-5 px-md-5 px-2 row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-6 gx-0"
+const featuresContainerClasses =
+  "row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-6 gx-0";
 
 export default function Features() {
   return (
-    <div className={featuresContainerClasses}>
-      {features}
+    <div className="mt-2 mt-md-5 px-md-5 px-2">
+      <h4 className="text-light mb-0 px-2 px-sm-3">FEATURES</h4>
+      <div className={featuresContainerClasses}>{features}</div>
     </div>
   );
 }

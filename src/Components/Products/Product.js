@@ -18,14 +18,14 @@ export default function Product(props) {
           <p style={{ color: "#f96058", fontSize: "small", margin: "0" }}>
             <i>{props.subTitle}</i>
           </p>
-          <div className="text-warning d-flex gap-2 fs-3 mt-1">
+          <div className="text-warning d-flex gap-2 mt-1">
             <AiFillStar />
             <AiFillStar />
             <AiFillStar />
             <AiFillStar />
             <AiFillStar />
           </div>
-          <h4 className="mt-1">{`$ ${props.price}`}</h4>
+          <h4 className="mt-1 mb-0">{`$ ${props.price}`}</h4>
           <div>
             <AiOutlineShoppingCart className="d-block ms-auto fs-3"/>
           </div>

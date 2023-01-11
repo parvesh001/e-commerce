@@ -1,10 +1,11 @@
 import React from "react";
-import CartTable from "../Components/Cart/CartTable";
+import CartTable from "../Components/CartContent/CartTable";
 import style from "./Cart.module.scss";
 import { useSelector } from "react-redux";
-import CartTotal from "../Components/Cart/CartTotal";
+import CartTotal from "../Components/CartContent/CartTotal";
 import Model from "../UI/Model/Model";
 import Alert from "../UI/Alert/Alert";
+import PlacedOrder from "../Components/PlacedOrder/PlacedOrder";
 
 export default function Cart() {
   const cartItems = useSelector((state) => state.cart.cartItems);
@@ -12,28 +13,29 @@ export default function Cart() {
     (state) => state.indicators
   );
 
-  if (!isLoading && !cartItems.length) {
-    return (
-      <div className={style["empty-cart"]}>
-        <h4>Your Cart is Empty!</h4>
-      </div>
-    );
-  }
-
   return (
     <React.Fragment>
       <div className={style["user-cart"]}>
-      {show && <Alert className={status} alertMsg={message} />}
-      {isLoading && <Model>
-        <div className="spinner-border" role="status">
-          <span className="visually-hidden">Loading...</span>
+        {show && cartItems.length && <Alert className={status} alertMsg={message} />}
+        {isLoading && (
+          <Model>
+            <div className="spinner-border" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          </Model>
+        )}
+      </div>
+      {!cartItems.length && !isLoading && (
+        <div className="text-center text-light mt-2 mt-md-3">
+          <h4>Your Cart is Empty!</h4>
         </div>
-      </Model>}
-      </div>
-      <div className="overflow-auto">
-        <CartTable />
-      </div>
-      <CartTotal />
+      )}
+      {cartItems.length && (
+        <div className="overflow-auto">
+          <CartTable />
+          <CartTotal />
+        </div>
+      )}
     </React.Fragment>
   );
 }
