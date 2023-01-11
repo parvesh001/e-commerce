@@ -4,7 +4,7 @@ import style from "./Alert.module.scss";
 export default function Alert(props) {
   let alertClasses = `${style["alert"]} ${
     style[props.className]
-  } ${"px-2 py-1 px-md-5 py-md-2"}`;
+  } ${"px-3 py-1 px-md-5 py-md-2"}`;
   
   return (
     <div className={alertClasses}>

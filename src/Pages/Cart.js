@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 import CartTotal from "../Components/CartContent/CartTotal";
 import Model from "../UI/Model/Model";
 import Alert from "../UI/Alert/Alert";
-import PlacedOrder from "../Components/PlacedOrder/PlacedOrder";
 
 export default function Cart() {
   const cartItems = useSelector((state) => state.cart.cartItems);

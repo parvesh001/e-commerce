@@ -32,7 +32,7 @@ export default function CartTotal() {
 
   if (status === "successful") {
     setTimeout(() => {
-      navigate("/home");
+      navigate("/user-orders");
     }, 1000);
   }
 

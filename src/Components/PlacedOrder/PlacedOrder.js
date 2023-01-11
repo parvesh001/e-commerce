@@ -1,8 +1,11 @@
+
 import React from "react";
 
-export default function PlacedOrder() {
+export default function PlacedOrder(props) {
+  const { orderedItems,totalPrice } = props;
+
   return (
-    <div className="mt-2 mt-md-5 container text-light text-center">
+    <div className="mt-2 mt-md-5 container text-light text-center overflow-auto">
       <h5>Placed Order</h5>
       <table className="table text-light">
         <thead>
@@ -15,20 +18,26 @@ export default function PlacedOrder() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>
-              <img src={""} alt="product" width="80px" />
-            </td>
-            <td className="pt-4">Brand</td>
-            <td className="pt-4">price</td>
-            <td className="pt-4">quantity</td>
-            <td className="pt-4">product total price</td>
-          </tr>
+          {orderedItems.map((item) => {
+            let productSubtotal =
+              item.productPrice * item.productQuantity;
+            return (
+              <tr  key={`${item.id}${item.productSize}`}>
+                <td>
+                  <img src={item.srcImg} alt="product" width="80px" />
+                </td>
+                <td className="pt-4">{item.productBrand}</td>
+                <td className="pt-4">{item.productPrice}</td>
+                <td className="pt-4">{item.productQuantity}</td>
+                <td className="pt-4">{`$${productSubtotal}`}</td>
+              </tr>
+            );
+          })}
         </tbody>
         <tfoot>
           <tr>
             <th>Total</th>
-            <th>$200</th>
+            <th>{`$${totalPrice}`}</th>
           </tr>
         </tfoot>
       </table>
