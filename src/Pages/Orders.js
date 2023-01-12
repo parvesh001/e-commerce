@@ -6,6 +6,7 @@ import Model from "../UI/Model/Model";
 import Alert from "../UI/Alert/Alert";
 import TransparentButton from "../UI/TransparentButton/TransparentButton";
 import { useNavigate } from "react-router-dom";
+import GoToTop from "../Components/GoTop/GoToTop";
 
 export default function Orders() {
   const [placedOrder, setPlacedOrder] = useState(null);
@@ -102,6 +103,7 @@ export default function Orders() {
           totalPrice={placedOrder.total}
         />
       )}
+      <GoToTop/>
     </div>
   );
 }

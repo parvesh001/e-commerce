@@ -4,7 +4,6 @@ import Layout from "./Components/Layout/Layout";
 import Home from "./Pages/Home";
 import Shop from "./Pages/Shop";
 import ProductDetail from "./Pages/ProductDetail";
-import Blog from "./Pages/Blog";
 import Contact from "./Pages/Contact";
 import About from "./Pages/About";
 import Cart from "./Pages/Cart";
@@ -24,7 +23,6 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/shop/:productId" element={<ProductDetail />} />
-        <Route path="/blog" element={<Blog />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
         <Route path="/user-orders" element={<Orders />} />

@@ -4,6 +4,7 @@ import AuthContext from "../Context/auth-context";
 import TransparentButton from "../UI/TransparentButton/TransparentButton";
 import { useSelector } from "react-redux";
 import Model from "../UI/Model/Model";
+import GoToTop from "../Components/GoTop/GoToTop";
 
 export default function UserProfile() {
   const authCtx = useContext(AuthContext);
@@ -31,6 +32,7 @@ export default function UserProfile() {
             </TransparentButton>
           </div>
       </div>
+      <GoToTop/>
     </React.Fragment>
   );
 }

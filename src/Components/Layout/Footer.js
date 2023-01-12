@@ -5,7 +5,7 @@ import style from "./Footer.module.scss";
 
 export default function Footer() {
  const authCtx =  useContext(AuthContext)
-  const containerClasses = `${"container-fluid px-2 px-sm-4 px-md-5 py-2 py-md-5 mt-2 mt-md-5 bg-light"} ${
+  const containerClasses = `${"container-fluid px-2 px-sm-4 px-md-5 py-2 py-md-5 mt-2 mt-md-5 bg-light overflow-hidden"} ${
     style["footer"]
   }`;
   const footerClasses = "row row-cols-1 row-cols-sm-2 row-cols-md-4 mt-3";

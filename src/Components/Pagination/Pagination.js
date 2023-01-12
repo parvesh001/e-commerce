@@ -22,9 +22,9 @@ export default function Pagination({ totalProducts, productsSeil, paginate }) {
             <li
               key={number}
               onClick={numberClickHandler.bind(null, number)}
-              className="page-item"
+              className="page-item p-1"
             >
-              <p className="page-link" style={{ color: "#e63129" }}>
+              <p className="page-link shadow" style={{ color: "#e63129" }}>
                 {number}
               </p>
             </li>

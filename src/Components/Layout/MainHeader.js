@@ -68,11 +68,6 @@ export default function MainHeader() {
                   </NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink className={linkClasses} to="/blog">
-                    Blog
-                  </NavLink>
-                </li>
-                <li className="nav-item">
                   <NavLink className={linkClasses} to="/contact">
                     Contact
                   </NavLink>
