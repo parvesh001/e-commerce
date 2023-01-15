@@ -1,0 +1,12 @@
+.aboutHero {
+  background-image: URL("/public/Images/Heros/about-hero.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 12rem;
+  background-position: center;
+  margin-top: 5rem;
+  padding: 2rem 5rem;
+  @media only screen and (max-width: 420px) {
+    padding: 1rem;
+  }
+}

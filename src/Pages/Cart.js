@@ -1,8 +1,8 @@
 import React from "react";
-import CartTable from "../Components/CartContent/CartTable";
+import CartTable from "../Components/Cart/CartTable";
 import style from "./Cart.module.scss";
 import { useSelector } from "react-redux";
-import CartTotal from "../Components/CartContent/CartTotal";
+import CartTotal from "../Components/Cart/CartTotal";
 import Model from "../UI/Model/Model";
 import Alert from "../UI/Alert/Alert";
 import GoToTop from "../Components/GoTop/GoToTop";
