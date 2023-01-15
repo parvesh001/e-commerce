@@ -3,6 +3,7 @@ import {useNavigate } from "react-router-dom";
 import { AiFillStar, AiOutlineShoppingCart } from "react-icons/ai";
 import {LazyLoadImage} from "react-lazy-load-image-component"
 import "react-lazy-load-image-component/src/effects/blur.css"
+import style from "./Product.module.scss"
 
 export default function Product(props) {
   const navigate = useNavigate();
@@ -11,7 +12,7 @@ export default function Product(props) {
   }
   return (
     <div className="p-1 p-md-3 p-lg-4" onClick={productClickHandler}  style={{ cursor: "pointer" }}>
-      <div className="card shadow">
+      <div className={`${style.card} ${"card shadow"}`}>
         <LazyLoadImage src={props.srcImg} className="card-img-top" placeholderSrc={props.altImg} effect="blur" alt="product-img" />
         <div className="card-body">
           <h4 className="card-title mb-0 text-nowrap">{props.title}</h4>
