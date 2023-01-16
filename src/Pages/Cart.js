@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import CartTable from "../Components/Cart/CartTable";
 import style from "./Cart.module.scss";
 import { useSelector } from "react-redux";
@@ -7,16 +7,21 @@ import Model from "../UI/Model/Model";
 import Alert from "../UI/Alert/Alert";
 import GoToTop from "../Components/GoTop/GoToTop";
 
-export default function Cart() {
+const Cart = () => {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const { isLoading, show, message, status } = useSelector(
     (state) => state.indicators
   );
+  const [checkedout, setCheckedout] = useState(false);
+
+  const checkoutHandler = () => {
+    setCheckedout(true);
+  };
 
   return (
     <React.Fragment>
       <div className={style["user-cart"]}>
-        {show && cartItems.length && <Alert className={status} alertMsg={message} />}
+        {show && checkedout && <Alert className={status} alertMsg={message} />}
         {isLoading && (
           <Model>
             <div className="spinner-border" role="status">
@@ -33,10 +38,12 @@ export default function Cart() {
       {cartItems.length && (
         <div className="overflow-auto">
           <CartTable />
-          <CartTotal />
+          <CartTotal checkOut={checkoutHandler} />
         </div>
       )}
-      <GoToTop/>
+      <GoToTop />
     </React.Fragment>
   );
-}
+};
+
+export default Cart;

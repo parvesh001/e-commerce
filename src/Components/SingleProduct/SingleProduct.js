@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import TransparentButton from "../../UI/TransparentButton/TransparentButton";
 import { cartSliceActions } from "../../Store/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import style from "./SingleProduct.module.scss";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import AuthContext from "../../Context/auth-context";
 
 export default function SingleProduct(props) {
   const navigate = useNavigate();
+  const location = useLocation()
+  const authCtx = useContext(AuthContext)
   const { id, srcImg, productBrand, productType, productPrice } = props;
   const [productQuantity, setProductQuantity] = useState("");
   const [productSize, setProductSize] = useState("Select Size");
@@ -24,6 +27,13 @@ export default function SingleProduct(props) {
 
   const cartFormSubmitHandler = (event) => {
     event.preventDefault();
+
+    if(!authCtx.isLogedin){
+      authCtx.setLocation(location.pathname)
+      navigate("/user-authentication");
+      return;
+    }
+
     if (productSize !== "Select Size" && productQuantity > 0) {
       const itemData = {
         id,

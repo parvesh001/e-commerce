@@ -15,6 +15,7 @@ export default function MainHeader() {
       authCtx.setLocation("/user-profile");
     }
   };
+
   const linkClasses = (navData) =>
     navData.isActive
       ? `${"nav-link"} ${style.navLink} ${style.active}`

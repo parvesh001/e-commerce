@@ -1,5 +1,5 @@
-import { indicatorActions } from "./indicators";
 import { userSliceActions } from "./user";
+import { indicatorActions } from "./indicators";
 
 export const settingUser = (user) => {
   return (dispatch) => {
@@ -7,10 +7,10 @@ export const settingUser = (user) => {
       dispatch(indicatorActions.setLoading(true));
       try {
         const response = await fetch(
-          "https://e-commerce-eb5e0-default-rtdb.firebaseio.com/user.json",
+          "https://e-commerce-eb5e0-default-rtdb.firebaseio.com/users.json",
           {
-            method: "PUT",
-            body: JSON.stringify(user.user),
+            method: "POST",
+            body: JSON.stringify({user:user}),
             headers: {
               "Content-Type": "application/json",
             },
@@ -20,6 +20,7 @@ export const settingUser = (user) => {
         if (!response.ok) {
           throw new Error("failed to store user information!!");
         }
+
         dispatch(indicatorActions.setLoading(false));
         dispatch(
           indicatorActions.setAlerts({
@@ -37,6 +38,8 @@ export const settingUser = (user) => {
             })
           );
         }, 1000);
+       const data = await response.json();
+       localStorage.setItem("userID",JSON.stringify(data.name))
       } catch (error) {
         dispatch(indicatorActions.setLoading(false));
         dispatch(
@@ -61,13 +64,15 @@ export const settingUser = (user) => {
   };
 };
 
+
 export const gettingUser = () => {
   return async (dispatch) => {
     const getUser = async () => {
       dispatch(indicatorActions.setLoading(true));
       try {
+        let userID = JSON.parse(localStorage.getItem("userID"));
         const response = await fetch(
-          "https://e-commerce-eb5e0-default-rtdb.firebaseio.com/user.json"
+         `https://e-commerce-eb5e0-default-rtdb.firebaseio.com/users/${userID}/user.json`
         );
         
         if (!response.ok) {
@@ -75,6 +80,7 @@ export const gettingUser = () => {
         }
         dispatch(indicatorActions.setLoading(false));
         const data = await response.json();
+      
         return data;
       } catch (error) {
         dispatch(indicatorActions.setLoading(false));
@@ -97,7 +103,7 @@ export const gettingUser = () => {
       }
     };
     const user = await getUser();
-
+    
     dispatch(
       userSliceActions.replaceUser(
         user || {

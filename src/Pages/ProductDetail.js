@@ -12,6 +12,8 @@ export default function ProductDetail() {
   const { isLoading, show, message, status } = useSelector(
     (state) => state.indicators
   );
+  
+
   const params = useParams();
   const product = Product__Data.filter((pro) => {
     return pro.id === params.productId;
@@ -38,6 +40,7 @@ export default function ProductDetail() {
           productType={product[0].subTitle}
           productPrice={product[0].price}
           productDetails={productDetails}
+
         />
         <GoToTop />
       </div>

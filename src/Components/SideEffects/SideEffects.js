@@ -10,7 +10,7 @@ let isInitialRoundForUser = true;
 export default function SideEffects() {
   const dispatch = useDispatch();
   const cartData = useSelector((state) => state.cart);
-  const user = useSelector((state) => state.user);
+  const {user,change} = useSelector((state) => state.user);
 
   useEffect(() => {
     dispatch(fetchingCartData());
@@ -32,10 +32,10 @@ export default function SideEffects() {
       isInitialRoundForUser = false;
       return;
     }
-    if (user.change) {
+    if (change) {
       dispatch(settingUser(user));
     }
-  }, [dispatch, user]);
+  }, [dispatch, user, change]);
 
   return <div></div>;
 }

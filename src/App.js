@@ -36,7 +36,7 @@ function App() {
           <Route path="/shop/:productId" element={<ProductDetail />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/about" element={<About />} />
-          <Route path="/user-orders" element={<Orders />} />
+         <Route path="/user-orders" element={<Orders />} />
           <Route path="/cart" element={<Cart />} />
           {authCtx.isLogedin && (
             <Route path="/user-profile" element={<UserProfile />} />

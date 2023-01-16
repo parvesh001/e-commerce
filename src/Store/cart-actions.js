@@ -1,6 +1,7 @@
 import { indicatorActions } from "./indicators";
 import { cartSliceActions } from "./cartSlice";
 
+
 export const sendingCartData = (cartData) => {
   return (dispatch) => {
     let cartItems = [];
@@ -12,8 +13,9 @@ export const sendingCartData = (cartData) => {
     const sendCartData = async () => {
       dispatch(indicatorActions.setLoading(true));
       try {
+        const userID=JSON.parse(localStorage.getItem("userID"))
         const response = await fetch(
-          "https://e-commerce-eb5e0-default-rtdb.firebaseio.com/cart.json",
+          `https://e-commerce-eb5e0-default-rtdb.firebaseio.com/users/${userID}/cart.json`,
           {
             method: "PUT",
             body: JSON.stringify({ cartItems, totalPrice }),
@@ -73,8 +75,9 @@ export const fetchingCartData = () => {
     dispatch(indicatorActions.setLoading(true));
     const fetchCartData = async () => {
       try {
+        const userID=JSON.parse(localStorage.getItem("userID"))
         const response = await fetch(
-          "https://e-commerce-eb5e0-default-rtdb.firebaseio.com/cart.json"
+          `https://e-commerce-eb5e0-default-rtdb.firebaseio.com/users/${userID}/cart.json`
         );
         dispatch(indicatorActions.setLoading(false));
         if (!response.ok) {
@@ -103,9 +106,10 @@ export const fetchingCartData = () => {
     };
 
     const cartData = await fetchCartData();
+  
     let cartItems = [];
     let totalPrice = 0;
-    if (cartData.cartItems) {
+    if (cartData && cartData.cartItems) {
       cartItems = cartData.cartItems;
       totalPrice = cartData.totalPrice;
     }
@@ -123,8 +127,9 @@ export const checkingOut = (info) => {
     const checkOut = async () => {
       dispatch(indicatorActions.setLoading(true))
       try {
+        const userID=JSON.parse(localStorage.getItem("userID"))
         const response = await fetch(
-          "https://e-commerce-eb5e0-default-rtdb.firebaseio.com/placedOrder.json",
+          `https://e-commerce-eb5e0-default-rtdb.firebaseio.com/users/${userID}/placedOrder.json`,
           {
             method: "PUT",
             body: JSON.stringify(info),

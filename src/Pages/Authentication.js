@@ -5,6 +5,7 @@ import UserForm from "../Components/Forms/UserForm";
 import Model from "../UI/Model/Model";
 import Alert from "../UI/Alert/Alert";
 import AuthContext from "../Context/auth-context";
+import GoToTop from "../Components/GoTop/GoToTop";
 
 export default function Authentication() {
   const authCtx = useContext(AuthContext);
@@ -28,7 +29,7 @@ export default function Authentication() {
       )}
       <div
         className="d-flex align-items-center justify-content-center"
-        style={{ height: "100vh" }}
+        style={{ minHeight: "100vh" }}
       >
         {show && <Alert className={status} alertMsg={message} />}
         {authCtx.isSignedup && <UserForm token={token} />}
@@ -36,6 +37,7 @@ export default function Authentication() {
           <AuthForm getToken={tokenHandler} />
         )}
       </div>
+      <GoToTop/>
     </React.Fragment>
   );
 }

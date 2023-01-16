@@ -24,6 +24,7 @@ const userSlice = createSlice({
       state.change = true;
       state.user = action.payload;
     },
+   
   },
 });
 

@@ -1,40 +1,45 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import TransparentButton from "../../UI/TransparentButton/TransparentButton";
 import AuthContext from "../../Context/auth-context";
 import { checkingOut } from "../../Store/cart-actions";
 
-export default function CartTotal() {
+ const CartTotal = ({checkOut}) =>{
+  const [isClicked,setIsClicked] =useState(false)
   const location = useLocation();
   const dispatch = useDispatch();
   const cartTotal = useSelector((state) => state.cart.totalPrice);
   const { cartItems, totalPrice } = useSelector((state) => state.cart);
-  const { user } = useSelector((state) => state.user);
   const { status } = useSelector((state) => state.indicators);
   const navigate = useNavigate();
   const authCtx = useContext(AuthContext);
 
   const checkoutHandler = () => {
+    checkOut();
     if (!authCtx.isLogedin) {
       authCtx.setLocation(location.pathname);
       navigate("/user-authentication");
-    } else {
+    } else { 
       dispatch(
         checkingOut({
-          customer: user,
           orderedItems: cartItems,
           total: totalPrice,
         })
+
       );
+      setIsClicked(true)
+      
     }
+
   };
 
-  if (status === "successful") {
+  if (isClicked && status === "successful") {
     setTimeout(() => {
       navigate("/user-orders");
     }, 1000);
   }
+ 
 
   return (
     <div className="container">
@@ -66,3 +71,5 @@ export default function CartTotal() {
     </div>
   );
 }
+
+export default CartTotal

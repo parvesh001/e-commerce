@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PlacedOrder from "../Components/PlacedOrder/PlacedOrder";
 import { indicatorActions } from "../Store/indicators";
 import Model from "../UI/Model/Model";
 import Alert from "../UI/Alert/Alert";
 import TransparentButton from "../UI/TransparentButton/TransparentButton";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import GoToTop from "../Components/GoTop/GoToTop";
+import AuthContext from "../Context/auth-context";
 
 export default function Orders() {
   const [placedOrder, setPlacedOrder] = useState(null);
@@ -15,13 +16,14 @@ export default function Orders() {
   const { isLoading, status, message, show } = useSelector(
     (state) => state.indicators
   );
-
+ 
   useEffect(() => {
     const fetchPlacedOrder = async () => {
       dispatch(indicatorActions.setLoading(true));
       try {
+        const userID = JSON.parse(localStorage.getItem("userID"));
         const response = await fetch(
-          "https://e-commerce-eb5e0-default-rtdb.firebaseio.com/placedOrder.json"
+          `https://e-commerce-eb5e0-default-rtdb.firebaseio.com/users/${userID}/placedOrder.json`
         );
         if (!response.ok) {
           throw new Error("Failed To Fetch Ordered Details!!");
@@ -66,7 +68,25 @@ export default function Orders() {
       }
     };
     fetchPlacedOrder();
-  }, []);
+  }, [dispatch]);
+
+  const authCtx = useContext(AuthContext);
+
+  if (!authCtx.isLogedin) {
+    return (
+      <div
+        style={{
+          marginTop: "6.5rem",
+          color: "#fff",
+          textAlign: "center",
+          minHeight: "30vh",
+        }}
+      >
+        <h4>Please Login First</h4>
+        <TransparentButton><Link to="/user-authentication" className="text-decoration-none">Login</Link></TransparentButton>
+      </div>
+    );
+  }
 
   return (
     <div
@@ -74,7 +94,7 @@ export default function Orders() {
         marginTop: "6.5rem",
         color: "#fff",
         textAlign: "center",
-        minHeight:"30vh"
+        minHeight: "30vh",
       }}
     >
       {show && status === "unsuccessful" && (
@@ -103,7 +123,7 @@ export default function Orders() {
           totalPrice={placedOrder.total}
         />
       )}
-      <GoToTop/>
+      <GoToTop />
     </div>
   );
 }

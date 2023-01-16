@@ -3,7 +3,7 @@ import "./DarkButton.scss";
 export default function DarkButton(props) {
   return (
     <div className="dark-btn">
-      <button className="btn">{props.children}</button>
+      <button className="btn" onClick={props.onClick}>{props.children}</button>
     </div>
   );
 }
