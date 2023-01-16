@@ -71,7 +71,7 @@ export default function Orders() {
   return (
     <div
       style={{
-        marginTop: "8rem",
+        marginTop: "6.5rem",
         color: "#fff",
         textAlign: "center",
         minHeight:"30vh"

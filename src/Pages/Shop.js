@@ -21,12 +21,7 @@ export default function Shop() {
 
   return (
     <>
-      <div className={`${style["shop-now"]}`}>
-        <h1>#Stay Home</h1>
-        <h6 className="bg-light px-2 p-1 d-inline">
-          Save more with coupans and up to 70%!!
-        </h6>
-      </div>
+      <div className={`${style["shop-now"]}`}/>
       <Products
         products={currentProducts}
         productsClasses={"row row-cols-1 row-cols-sm-3 gx-0"}

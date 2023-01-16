@@ -70,7 +70,7 @@ export default function SingleProduct(props) {
           </div>
           <form
             onSubmit={cartFormSubmitHandler}
-            className="d-flex mb-3 gap-md-2"
+            className="d-flex mb-3 gap-2"
           >
             <input
               onChange={quantityChangeHandler}

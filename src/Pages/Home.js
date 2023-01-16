@@ -25,12 +25,14 @@ export default function Home() {
         templateText={"UP TO 70% off - All T-shirts and Accessories"}
         templateBtn={"Explore More"}
       />
-      <Products
+       <div className="d-none d-md-block">
+       <Products
         products={Product__Data}
         productsClasses="row row-cols-1 row-cols-sm-3 row-cols-md-4 gx-0"
         productsTitle={"New Arrival Products"}
         productsText={"Outstanding Collection of New Arrival Products"}
       />
+       </div>
       <UsersReviews/>
     </React.Fragment>
   );

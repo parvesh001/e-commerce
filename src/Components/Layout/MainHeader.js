@@ -43,9 +43,9 @@ export default function MainHeader() {
             aria-labelledby="offcanvasNavbarLabel"
           >
             <div className="offcanvas-header">
-              <h5 className="offcanvas-title" id="offcanvasNavbarLabel">
-                Puma
-              </h5>
+              <img src="/images/logo/puma.png" width="100" className="offcanvas-title" id="offcanvasNavbarLabel" alt="brand"/>
+                
+             
               <RxCross2
                 type="button"
                 className={style.cross}

@@ -31,7 +31,7 @@ export default function AboutMain() {
             adipisicing elit. Odit error reprehenderit, voluptatibus expedita
             dolores earum aliquam pariatur quo consequatur modi.
           </abbr>
-          <marquee bgColor="white" style={{color:"red"}}>
+          <marquee bgcolor="white" style={{color:"red"}}>
             Lorem, ipsum dolor sit amet consectetur adipisicing elit.
             Perferendis libero ipsa exercitationem architecto aut sit ipsam
             quaerat natus quod est.

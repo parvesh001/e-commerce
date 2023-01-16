@@ -6,6 +6,7 @@ import TransparentButton from "../../UI/TransparentButton/TransparentButton";
 import style from "./UserForm.module.scss";
 import AuthContext from "../../Context/auth-context";
 import { useNavigate } from "react-router-dom";
+import GoToTop from "../GoTop/GoToTop";
 
 export default function UserForm(props) {
   const authCtx = useContext(AuthContext);
@@ -135,7 +136,7 @@ export default function UserForm(props) {
   return (
     <div className={`${style["user-form"]} ${"container"}`}>
       <div className="d-flex justify-content-center">
-        <h4 className="text-center d-inline-block mb-5">
+        <h4 className="text-center d-inline-block mb-2 mb-md-5">
           PROVIDE MORE DETAILS
         </h4>
       </div>
@@ -245,6 +246,7 @@ export default function UserForm(props) {
           </TransparentButton>
         </div>
       </form>
+      <GoToTop/>
     </div>
   );
 }
