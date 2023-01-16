@@ -12,7 +12,7 @@ export default function Footer() {
   return (
     <div className={containerClasses}>
       <div className={style["site-logo"]}>
-        <img src="/images/logo/puma.png" width="100" alt="site-logo" />
+        <img src="/Images/logo/puma.png" width="100" alt="site-logo" />
       </div>
       <div className={footerClasses}>
         <div>
@@ -70,10 +70,10 @@ export default function Footer() {
             <p>From App or Google Play Store</p>
             <div>
               <Link>
-                <img src="/images/Applications logos/apple.png" alt="apple logo" />
+                <img src="/Images/Applications logos/apple.png" alt="apple logo" />
               </Link>
               <Link>
-                <img src="/images/Applications logos/play-store.png" alt="play store logo" />
+                <img src="/Images/Applications logos/play-store.png" alt="play store logo" />
               </Link>
             </div>
           </div>
@@ -82,7 +82,7 @@ export default function Footer() {
             <div>
               <Link>
                 
-                <img src="/images/Applications logos/paypal.png" alt="paypal logo" />
+                <img src="/Images/Applications logos/paypal.png" alt="paypal logo" />
               </Link>
             </div>
           </div>

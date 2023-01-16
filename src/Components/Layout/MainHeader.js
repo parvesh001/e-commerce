@@ -8,7 +8,6 @@ import AuthContext from "../../Context/auth-context";
 import { AiOutlineMenu } from "react-icons/ai";
 import { RxCross2 } from "react-icons/rx";
 
-
 export default function MainHeader() {
   const authCtx = useContext(AuthContext);
   const profileClickHandler = () => {
@@ -34,7 +33,7 @@ export default function MainHeader() {
             data-bs-target="#offcanvasNavbar"
             aria-controls="offcanvasNavbar"
           >
-            <AiOutlineMenu className={style.burger}/>
+            <AiOutlineMenu className={style.burger} />
           </button>
           <div
             className="offcanvas offcanvas-end"
@@ -43,9 +42,14 @@ export default function MainHeader() {
             aria-labelledby="offcanvasNavbarLabel"
           >
             <div className="offcanvas-header">
-              <img src="/images/logo/puma.png" width="100" className="offcanvas-title" id="offcanvasNavbarLabel" alt="brand"/>
-                
-             
+              <img
+                src="/Images/logo/puma.png"
+                width="100"
+                className="offcanvas-title"
+                id="offcanvasNavbarLabel"
+                alt="brand"
+              />
+
               <RxCross2
                 type="button"
                 className={style.cross}
@@ -89,7 +93,11 @@ export default function MainHeader() {
                     <BsFillCartCheckFill className="fs-4" />
                   </NavLink>
                 </li>
-                <li className="nav-item" onClick={profileClickHandler} data-bs-dismiss="offcanvas">
+                <li
+                  className="nav-item"
+                  onClick={profileClickHandler}
+                  data-bs-dismiss="offcanvas"
+                >
                   <NavLink
                     className={linkClasses}
                     to={
