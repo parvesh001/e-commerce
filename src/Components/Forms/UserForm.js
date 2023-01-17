@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { userSliceActions } from "../../Store/user";
+import {  useSelector } from "react-redux";
 import useInput from "../../Hooks/use-input";
 import TransparentButton from "../../UI/TransparentButton/TransparentButton";
 import style from "./UserForm.module.scss";
@@ -12,7 +11,7 @@ export default function UserForm(props) {
   const authCtx = useContext(AuthContext);
   const navigate = useNavigate();
   const { status } = useSelector((state) => state.indicators);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const {
     inputValue: nameValue,
     inputIsValid: nameIsValid,
@@ -85,17 +84,37 @@ export default function UserForm(props) {
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
-    dispatch(
-      userSliceActions.setUser({
-        name: nameValue,
-        email: emailValue,
-        address: addressValue,
-        addressB: addressBValue,
-        city: cityValue,
-        state: stateValue,
-        zip: zipValue,
-      })
-    );
+    const setUser = async () => {
+      try {
+        const response = await fetch(
+          "https://e-commerce-eb5e0-default-rtdb.firebaseio.com/users.json",
+          {
+            method: "POST",
+            body: JSON.stringify({user:{
+              name: nameValue,
+              email: emailValue,
+              address: addressValue,
+              addressB: addressBValue,
+              city: cityValue,
+              state: stateValue,
+              zip: zipValue,
+            }}),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        if (!response.ok) {
+          throw new Error("failed to store user information!!");
+        }
+       const data = await response.json();
+       localStorage.setItem("userID",JSON.stringify(data.name))
+      } catch (error) {
+        console.log(error.message)
+      }
+    };
+    setUser();
+   
     nameReset();
     emailReset();
     addressReset();
@@ -132,6 +151,9 @@ export default function UserForm(props) {
   const zipInputClasses = zipIsInvalid
     ? `${"col-md-2"} ${style.formInput} ${style.inValid}`
     : `${"col-md-2"} ${style.formInput}`;
+
+
+
 
   return (
     <div className={`${style["user-form"]} ${"container"}`}>
@@ -250,3 +272,6 @@ export default function UserForm(props) {
     </div>
   );
 }
+
+
+

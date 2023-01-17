@@ -1,8 +1,29 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
 
 export default function User() {
-  const user = useSelector((state) => state.user.user);
+  const [user, setUser] = useState({name:null,email:null,address:null,addressB:null,city:null,state:null,zip:null});
+
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        let userID = JSON.parse(localStorage.getItem("userID"));
+        const response = await fetch(
+          `https://e-commerce-eb5e0-default-rtdb.firebaseio.com/users/${userID}/user.json`
+        );
+
+        if (!response.ok) {
+          throw new Error("something went wrong!!");
+        }
+
+        const data = await response.json();
+
+        setUser(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getUser();
+  }, []);
 
   return (
     <div className="py-2 px-3 py-md-3 px-md-5 text-light border">

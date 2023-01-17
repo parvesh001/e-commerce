@@ -1,45 +1,54 @@
-import React, { useContext, useState } from "react";
+import React, { useContext} from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import TransparentButton from "../../UI/TransparentButton/TransparentButton";
 import AuthContext from "../../Context/auth-context";
-import { checkingOut } from "../../Store/cart-actions";
+import { cartSliceActions } from "../../Store/cartSlice";
 
- const CartTotal = ({checkOut}) =>{
-  const [isClicked,setIsClicked] =useState(false)
+
+
+const CartTotal = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const cartTotal = useSelector((state) => state.cart.totalPrice);
   const { cartItems, totalPrice } = useSelector((state) => state.cart);
-  const { status } = useSelector((state) => state.indicators);
   const navigate = useNavigate();
   const authCtx = useContext(AuthContext);
 
   const checkoutHandler = () => {
-    checkOut();
     if (!authCtx.isLogedin) {
       authCtx.setLocation(location.pathname);
       navigate("/user-authentication");
-    } else { 
-      dispatch(
-        checkingOut({
-          orderedItems: cartItems,
-          total: totalPrice,
-        })
+    } else {
+      const checkOut = async () => {
+        try {
+          const userID = JSON.parse(localStorage.getItem("userID"));
+          const response = await fetch(
+            `https://e-commerce-eb5e0-default-rtdb.firebaseio.com/users/${userID}/placedOrder.json`,
+            {
+              method: "PUT",
+              body: JSON.stringify({
+                orderedItems: cartItems,
+                total: totalPrice,
+              }),
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          );
 
-      );
-      setIsClicked(true)
-      
+          if (!response.ok) {
+            throw new Error("Failed to Checkout!");
+          }
+
+          dispatch(cartSliceActions.cartReset());
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      checkOut();
     }
-
   };
-
-  if (isClicked && status === "successful") {
-    setTimeout(() => {
-      navigate("/user-orders");
-    }, 1000);
-  }
- 
 
   return (
     <div className="container">
@@ -70,6 +79,6 @@ import { checkingOut } from "../../Store/cart-actions";
       </TransparentButton>
     </div>
   );
-}
+};
 
-export default CartTotal
+export default CartTotal;

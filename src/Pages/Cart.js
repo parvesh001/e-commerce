@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import CartTable from "../Components/Cart/CartTable";
 import style from "./Cart.module.scss";
 import { useSelector } from "react-redux";
@@ -12,16 +12,12 @@ const Cart = () => {
   const { isLoading, show, message, status } = useSelector(
     (state) => state.indicators
   );
-  const [checkedout, setCheckedout] = useState(false);
 
-  const checkoutHandler = () => {
-    setCheckedout(true);
-  };
 
   return (
     <React.Fragment>
       <div className={style["user-cart"]}>
-        {show && checkedout && <Alert className={status} alertMsg={message} />}
+        {show && <Alert className={status} alertMsg={message} />}
         {isLoading && (
           <Model>
             <div className="spinner-border" role="status">
@@ -38,7 +34,7 @@ const Cart = () => {
       {cartItems.length && (
         <div className="overflow-auto">
           <CartTable />
-          <CartTotal checkOut={checkoutHandler} />
+          <CartTotal />
         </div>
       )}
       <GoToTop />
