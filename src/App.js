@@ -2,7 +2,6 @@ import React, { useContext, Suspense } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./Components/Layout/Layout";
 import "./App.css";
-import Authentication from "./Pages/Authentication";
 import AuthContext from "./Context/auth-context";
 import SideEffects from "./Components/SideEffects/SideEffects";
 import Model from "./UI/Model/Model";
@@ -15,6 +14,7 @@ const Cart = React.lazy(() => import("./Pages/Cart"));
 const Orders = React.lazy(() => import("./Pages/Orders"));
 const UserProfile = React.lazy(() => import("./Pages/UserProfile"));
 const ProductDetail = React.lazy(() => import("./Pages/ProductDetail"));
+const Authentication = React.lazy(()=> import("./Pages/Authentication"))
 
 function App() {
   const authCtx = useContext(AuthContext);
