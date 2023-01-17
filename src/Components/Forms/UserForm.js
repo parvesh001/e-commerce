@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import {  useSelector } from "react-redux";
 import useInput from "../../Hooks/use-input";
 import TransparentButton from "../../UI/TransparentButton/TransparentButton";
 import style from "./UserForm.module.scss";
@@ -10,8 +9,7 @@ import GoToTop from "../GoTop/GoToTop";
 export default function UserForm(props) {
   const authCtx = useContext(AuthContext);
   const navigate = useNavigate();
-  const { status } = useSelector((state) => state.indicators);
-  // const dispatch = useDispatch();
+
   const {
     inputValue: nameValue,
     inputIsValid: nameIsValid,
@@ -86,6 +84,7 @@ export default function UserForm(props) {
     event.preventDefault();
     const setUser = async () => {
       try {
+        props.setLoading(true)
         const response = await fetch(
           "https://e-commerce-eb5e0-default-rtdb.firebaseio.com/users.json",
           {
@@ -107,10 +106,21 @@ export default function UserForm(props) {
         if (!response.ok) {
           throw new Error("failed to store user information!!");
         }
-       const data = await response.json();
+        const data = await response.json();
+        props.setLoading(false)
+        props.setAlert({show:true,message:"Request Accepted",status:"successful"})
+        setTimeout(()=>{
+          props.setAlert({show:false,message:null,status:null})
+          authCtx.login(props.token);
+          navigate(authCtx.location);
+        },1000)
        localStorage.setItem("userID",JSON.stringify(data.name))
       } catch (error) {
-        console.log(error.message)
+        props.setLoading(false)
+        props.setAlert({show:true,message:error.message,status:"unsuccessful"})
+        setTimeout(()=>{
+          props.setAlert({show:false,message:null,status:null})
+        },1000)
       }
     };
     setUser();
@@ -123,12 +133,7 @@ export default function UserForm(props) {
     zipReset();
   };
 
-  if (status === "successful") {
-    setTimeout(()=>{
-      authCtx.login(props.token);
-      navigate(authCtx.location);
-    },1000)
-  }
+
 
   const nameInputClasses = nameIsInvalid
     ? `${"col-md-6"} ${style.formInput} ${style.inValid}`

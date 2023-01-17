@@ -7,7 +7,7 @@ let initialRound = true;
 
 export default function SideEffects() {
   const dispatch = useDispatch();
-  const cartData = useSelector((state) => state.cart);
+  const { change, cartItems, totalPrice } = useSelector((state) => state.cart);
 
   useEffect(() => {
     dispatch(fetchingCartData());
@@ -18,12 +18,15 @@ export default function SideEffects() {
       initialRound = false;
       return;
     }
-    if (cartData.change) {
-      dispatch(sendingCartData(cartData));
+    if (change) {
+      dispatch(
+        sendingCartData({
+          cartItems,
+          totalPrice,
+        })
+      );
     }
-  }, [dispatch, cartData]);
-
- 
+  }, [dispatch, change, cartItems, totalPrice]);
 
   return <div></div>;
 }

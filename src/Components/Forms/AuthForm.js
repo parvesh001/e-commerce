@@ -1,14 +1,11 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../../Context/auth-context";
-import { indicatorActions } from "../../Store/indicators";
 import useInput from "../../Hooks/use-input";
 import TransparentButton from "../../UI/TransparentButton/TransparentButton";
 import style from "./AuthForm.module.scss";
-import { useDispatch } from "react-redux"; 
 
 export default function AuthForm(props) {
-  const dispatch = useDispatch();
   const authCtx = useContext(AuthContext);
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(false);
@@ -39,8 +36,8 @@ export default function AuthForm(props) {
   }
 
   const authFormSubmitHandler = (event) => {
+    props.setLoading(true)
     event.preventDefault();
-
     let url;
     if (isLogin) {
       url =
@@ -49,7 +46,6 @@ export default function AuthForm(props) {
       url =
         "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCNhFI9T4RLwVxvuPPwIrxNJKccDAR7vVA";
     }
-    dispatch(indicatorActions.setLoading(true));
     fetch(url, {
       method: "POST",
       body: JSON.stringify({
@@ -71,56 +67,30 @@ export default function AuthForm(props) {
         }
       })
       .then((data) => {
-        dispatch(indicatorActions.setLoading(false));
-        dispatch(
-          indicatorActions.setAlerts({
-            show: true,
-            status: "successful",
-            message: isLogin
-              ? "Loggedin Successfully"
-              : "Created Account Successfully",
-          })
-        );
+        props.setLoading(false)
+        props.setAlert({show:true,message:"Request Accepted",status:"successful"})
+        setTimeout(()=>{
+          props.setAlert({show:false,message:null,status:null})
+        },1000)
         if (isLogin) {
-          setTimeout(()=>{
+          setTimeout(() => {
             authCtx.login(data.idToken);
             navigate(authCtx.location);
-            authCtx.signup(true)
-          },1000)
+            authCtx.signup(true);
+          }, 1000);
         } else {
-          setTimeout(()=>{
-            authCtx.signup(true)
-            props.getToken(data.idToken)
-          },1200)
+          setTimeout(() => {
+            authCtx.signup(true);
+            props.getToken(data.idToken);
+          }, 1200);
         }
-        setTimeout(() => {
-          dispatch(
-            indicatorActions.setAlerts({
-              show: false,
-              status: null,
-              message: null
-            })
-          );
-        }, 1000);
       })
       .catch((error) => {
-        dispatch(indicatorActions.setLoading(false));
-        dispatch(
-          indicatorActions.setAlerts({
-            show: true,
-            status: "unsuccessful",
-            message: error.message,
-          })
-        );
-        setTimeout(() => {
-          dispatch(
-            indicatorActions.setAlerts({
-              show: false,
-              status: null,
-              message: null
-            })
-          );
-        }, 1000);
+        props.setLoading(false)
+        props.setAlert({show:true,message:error.message,status:"unsuccessful"})
+        setTimeout(()=>{
+          props.setAlert({show:false,message:null,status:null})
+        },1000)
       });
 
     emailInputReset();

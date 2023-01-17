@@ -1,6 +1,4 @@
-import { indicatorActions } from "./indicators";
 import { cartSliceActions } from "./cartSlice";
-
 
 export const sendingCartData = (cartData) => {
   return (dispatch) => {
@@ -11,9 +9,9 @@ export const sendingCartData = (cartData) => {
       totalPrice = cartData.totalPrice;
     }
     const sendCartData = async () => {
-      dispatch(indicatorActions.setLoading(true));
       try {
-        const userID=JSON.parse(localStorage.getItem("userID"))
+        dispatch(cartSliceActions.setLoading(true));
+        const userID = JSON.parse(localStorage.getItem("userID"));
         const response = await fetch(
           `https://e-commerce-eb5e0-default-rtdb.firebaseio.com/users/${userID}/cart.json`,
           {
@@ -24,22 +22,21 @@ export const sendingCartData = (cartData) => {
             },
           }
         );
-        
-        if (!response.ok) {
-          throw new Error("Failed to send data!");
-        }
 
-        dispatch(indicatorActions.setLoading(false));
+        if (!response.ok) {
+          throw new Error("Item Can Not be Added!");
+        }
+        dispatch(cartSliceActions.setLoading(false));
         dispatch(
-          indicatorActions.setAlerts({
+          cartSliceActions.setAlert({
             show: true,
             status: "successful",
-            message: "Added to cart",
+            message: "Item Added Successfully",
           })
         );
         setTimeout(() => {
           dispatch(
-            indicatorActions.setAlerts({
+            cartSliceActions.setAlert({
               show: false,
               status: null,
               message: null,
@@ -47,9 +44,9 @@ export const sendingCartData = (cartData) => {
           );
         }, 1000);
       } catch (error) {
-        dispatch(indicatorActions.setLoading(false));
+        dispatch(cartSliceActions.setLoading(false));
         dispatch(
-          indicatorActions.setAlerts({
+          cartSliceActions.setAlert({
             show: true,
             status: "unsuccessful",
             message: error.message,
@@ -57,7 +54,7 @@ export const sendingCartData = (cartData) => {
         );
         setTimeout(() => {
           dispatch(
-            indicatorActions.setAlerts({
+            cartSliceActions.setAlert({
               show: false,
               status: null,
               message: null,
@@ -72,41 +69,22 @@ export const sendingCartData = (cartData) => {
 
 export const fetchingCartData = () => {
   return async (dispatch) => {
-    dispatch(indicatorActions.setLoading(true));
     const fetchCartData = async () => {
       try {
-        const userID=JSON.parse(localStorage.getItem("userID"))
+        const userID = JSON.parse(localStorage.getItem("userID"));
         const response = await fetch(
           `https://e-commerce-eb5e0-default-rtdb.firebaseio.com/users/${userID}/cart.json`
         );
-        dispatch(indicatorActions.setLoading(false));
         if (!response.ok) {
           throw new Error("Failed to fetch cart data");
         }
         const data = await response.json();
         return data;
       } catch (error) {
-        dispatch(
-          indicatorActions.setAlerts({
-            show: true,
-            status: "unsuccessful",
-            message: "Failed to load cart data!",
-          })
-        );
-        setTimeout(() => {
-          dispatch(
-            indicatorActions.setAlerts({
-              show: false,
-              status: null,
-              message: null,
-            })
-          );
-        }, 1000);
+        console.log(error);
       }
     };
-
     const cartData = await fetchCartData();
-  
     let cartItems = [];
     let totalPrice = 0;
     if (cartData && cartData.cartItems) {
@@ -121,4 +99,3 @@ export const fetchingCartData = () => {
     );
   };
 };
-

@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import TransparentButton from "../../UI/TransparentButton/TransparentButton";
 import { cartSliceActions } from "../../Store/cartSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import style from "./SingleProduct.module.scss";
 import { useLocation, useNavigate } from "react-router-dom";
 import AuthContext from "../../Context/auth-context";
@@ -13,7 +13,6 @@ export default function SingleProduct(props) {
   const { id, srcImg, productBrand, productType, productPrice } = props;
   const [productQuantity, setProductQuantity] = useState("");
   const [productSize, setProductSize] = useState("Select Size");
-  const { status } = useSelector((state) => state.indicators);
 
   const dispatch = useDispatch();
   const { addToCart } = cartSliceActions;
@@ -27,13 +26,11 @@ export default function SingleProduct(props) {
 
   const cartFormSubmitHandler = (event) => {
     event.preventDefault();
-
     if(!authCtx.isLogedin){
       authCtx.setLocation(location.pathname)
       navigate("/user-authentication");
       return;
     }
-
     if (productSize !== "Select Size" && productQuantity > 0) {
       const itemData = {
         id,
@@ -48,11 +45,6 @@ export default function SingleProduct(props) {
     setProductQuantity("");
   };
 
-  if (status === "successful") {
-    setTimeout(()=>{
-      navigate("/cart");
-    },1000)
-  }
 
   return (
     <div className="container">

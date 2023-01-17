@@ -1,9 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-
 const cartSlice = createSlice({
   name: "cart data",
-  initialState:{ cartItems: [], totalPrice: 0, change:false },
+  initialState: {
+    cartItems: [],
+    totalPrice: 0,
+    change: false,
+    isLoading: false,
+    status: null,
+    message: null,
+    show: false,
+  },
   reducers: {
     replaceCartData(state, action) {
       state.cartItems = action.payload.cartItems;
@@ -19,7 +26,8 @@ const cartSlice = createSlice({
       });
 
       if (indexOfExistedItem !== -1) {
-        state.cartItems[indexOfExistedItem].productQuantity += action.payload.productQuantity
+        state.cartItems[indexOfExistedItem].productQuantity +=
+          action.payload.productQuantity;
       } else {
         state.cartItems.push(action.payload);
       }
@@ -39,18 +47,29 @@ const cartSlice = createSlice({
           acc += curr.productPrice * curr.productQuantity;
           return acc;
         }, 0);
-        state.cartItems = newProducts
-        state.totalPrice = newTotalPrice
+        state.cartItems = newProducts;
+        state.totalPrice = newTotalPrice;
         state.change = true;
       } else {
-        return { cartItems: [], totalPrice: 0, change:true };
+        return { cartItems: [], totalPrice: 0, change: true };
       }
     },
-    cartReset(state){
+    cartReset(state) {
       state.cartItems = [];
       state.totalPrice = 0;
       state.change = true;
-    }
+    },
+    setLoading(state,action) {
+      state.isLoading = action.payload
+    },
+    setAlert(state, action) {
+      state.show = action.payload.show;
+      state.status = action.payload.status;
+      state.message = action.payload.message;
+    },
+    setShow(state) {
+      state.show = false;
+    },
   },
 });
 
