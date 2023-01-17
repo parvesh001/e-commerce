@@ -62,7 +62,7 @@ export default function Cart() {
       </div>
     );
   }
-  if (cartItems.length && !sideEffect.isLoading) {
+  if (cartItems.length) {
     cartMainContent = (
       <div className="overflow-auto">
         <CartTable />

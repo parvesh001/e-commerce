@@ -47,8 +47,9 @@ const CartTotal = ({ setLoading, setAlert }) => {
           });
           setTimeout(() => {
             setAlert({ show: false, status: null, message: null });
+            dispatch(cartSliceActions.cartReset());
           }, 1000);
-          dispatch(cartSliceActions.cartReset());
+          
         } catch (error) {
           setLoading(false);
           setAlert({

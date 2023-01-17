@@ -14,29 +14,28 @@ const Cart = React.lazy(() => import("./Pages/Cart"));
 const Orders = React.lazy(() => import("./Pages/Orders"));
 const UserProfile = React.lazy(() => import("./Pages/UserProfile"));
 const ProductDetail = React.lazy(() => import("./Pages/ProductDetail"));
-const Authentication = React.lazy(()=> import("./Pages/Authentication"))
+const Authentication = React.lazy(() => import("./Pages/Authentication"));
 
 function App() {
   const authCtx = useContext(AuthContext);
+  const fallbackContent = (
+    <Model>
+      <div className="spinner-border" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </div>
+    </Model>
+  );
   return (
     <Layout>
       <SideEffects />
-      <Suspense
-        fallback={
-          <Model>
-            <div className="spinner-border" role="status">
-              <span className="visually-hidden">Loading...</span>
-            </div>
-          </Model>
-        }
-      >
+      <Suspense fallback={fallbackContent}>
         <Routes>
           <Route path="/home" element={<Home />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/shop/:productId" element={<ProductDetail />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/about" element={<About />} />
-         <Route path="/user-orders" element={<Orders />} />
+          <Route path="/user-orders" element={<Orders />} />
           <Route path="/cart" element={<Cart />} />
           {authCtx.isLogedin && (
             <Route path="/user-profile" element={<UserProfile />} />
