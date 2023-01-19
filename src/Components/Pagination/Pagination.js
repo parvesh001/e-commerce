@@ -2,7 +2,7 @@ import React from "react";
 import { useSearchParams } from "react-router-dom";
 
 export default function Pagination({ totalProducts, productsSeil, paginate }) {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [ , setSearchParams] = useSearchParams();
 
   let pageNumbers = [];
   for (let i = 1; i <= totalProducts / productsSeil; i++) {

@@ -33,6 +33,7 @@ export default function ContactDetails() {
           style={{border:"0",width:"100%", height:"100%"}}
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
+          title="google map"
         />
       </div>
     </div>

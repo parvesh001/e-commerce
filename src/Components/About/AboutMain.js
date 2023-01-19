@@ -31,11 +31,11 @@ export default function AboutMain() {
             adipisicing elit. Odit error reprehenderit, voluptatibus expedita
             dolores earum aliquam pariatur quo consequatur modi.
           </abbr>
-          <marquee bgcolor="white" style={{color:"red"}}>
+          <p bgcolor="white" style={{color:"red"}}>
             Lorem, ipsum dolor sit amet consectetur adipisicing elit.
             Perferendis libero ipsa exercitationem architecto aut sit ipsam
             quaerat natus quod est.
-          </marquee>
+          </p>
         </div>
       </div>
     </div>
