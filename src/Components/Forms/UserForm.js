@@ -19,14 +19,6 @@ export default function UserForm(props) {
     reset: nameReset,
   } = useInput((value) => value.trim() !== "");
   const {
-    inputValue: emailValue,
-    inputIsValid: emailIsValid,
-    inputIsInvalid: emailIsInvalid,
-    inputChangeHandler: emailChangeHandler,
-    blurHandler: emailBlurHandler,
-    reset: emailReset,
-  } = useInput((value) => value.includes("@"));
-  const {
     inputValue: addressValue,
     inputIsValid: addressIsValid,
     inputIsInvalid: addressIsInvalid,
@@ -70,7 +62,6 @@ export default function UserForm(props) {
 
   if (
     nameIsValid &&
-    emailIsValid &&
     addressIsValid &&
     addressBIsValid &&
     cityIsValid &&
@@ -80,65 +71,62 @@ export default function UserForm(props) {
     formIsValid = true;
   }
 
-  const formSubmitHandler = (event) => {
+  const formSubmitHandler = async (event) => {
+    props.setLoading(true)
     event.preventDefault();
-    const setUser = async () => {
-      try {
-        props.setLoading(true)
-        const response = await fetch(
-          "https://e-commerce-eb5e0-default-rtdb.firebaseio.com/users.json",
-          {
-            method: "POST",
-            body: JSON.stringify({user:{
-              name: nameValue,
-              email: emailValue,
-              address: addressValue,
-              addressB: addressBValue,
-              city: cityValue,
-              state: stateValue,
-              zip: zipValue,
-            }}),
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        )
-        if (!response.ok) {
-          throw new Error("failed to store user information!!");
-        }
-        const data = await response.json();
-        props.setLoading(false)
-        props.setAlert({show:true,message:"Request Accepted",status:"successful"})
-        setTimeout(()=>{
-          props.setAlert({show:false,message:null,status:null})
-          authCtx.login(props.token);
-          navigate(authCtx.location);
-        },1000)
-       localStorage.setItem("userID",JSON.stringify(data.name))
-      } catch (error) {
-        props.setLoading(false)
-        props.setAlert({show:true,message:error.message,status:"unsuccessful"})
-        setTimeout(()=>{
-          props.setAlert({show:false,message:null,status:null})
-        },1000)
+    try {
+      const response = await fetch("http://localhost:8080/api/v1/users/userInfo", {
+        method: "POST",
+        body: JSON.stringify({
+          name: nameValue,
+          address: addressValue,
+          addressB: addressBValue,
+          city: cityValue,
+          state: stateValue,
+          zip: zipValue,
+        }),
+        headers: {
+          "Authorization":`Bearer ${props.token}`,
+          "Content-Type": "application/json",
+        },
+      });
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message);
       }
-    };
-    setUser();
-   
+      props.setLoading(false)
+      props.setAlert({
+        show: true,
+        message: "User Saved",
+        status: "successful",
+      });
+      setTimeout(() => {
+        props.setAlert({ show: false, message: null, status: null });
+      }, 1000);
+      setTimeout(()=>{
+        authCtx.saveToken(props.token);
+        navigate(authCtx.location);
+      },1000)
+    } catch (error) {
+      props.setLoading(false)
+      props.setAlert({
+        show: true,
+        message: error.message,
+        status: "unsuccessful",
+      });
+      setTimeout(() => {
+        props.setAlert({ show: false, message: null, status: null });
+      }, 1000);
+    }
+
     nameReset();
-    emailReset();
     addressReset();
     addressBReset();
     cityReset();
     zipReset();
   };
 
-
-
   const nameInputClasses = nameIsInvalid
-    ? `${"col-md-6"} ${style.formInput} ${style.inValid}`
-    : `${"col-md-6"} ${style.formInput}`;
-  const emailInputClasses = emailIsInvalid
     ? `${"col-md-6"} ${style.formInput} ${style.inValid}`
     : `${"col-md-6"} ${style.formInput}`;
   const addressInputClasses = addressIsInvalid
@@ -156,9 +144,6 @@ export default function UserForm(props) {
   const zipInputClasses = zipIsInvalid
     ? `${"col-md-2"} ${style.formInput} ${style.inValid}`
     : `${"col-md-2"} ${style.formInput}`;
-
-
-
 
   return (
     <div className={`${style["user-form"]} ${"container"}`}>
@@ -179,19 +164,6 @@ export default function UserForm(props) {
             type="text"
             className="form-control"
             id="inputName"
-          />
-        </div>
-        <div className={emailInputClasses}>
-          <label htmlFor="inputEmail4" className="form-label">
-            Email
-          </label>
-          <input
-            onChange={emailChangeHandler}
-            onBlur={emailBlurHandler}
-            value={emailValue}
-            type="email"
-            className="form-control"
-            id="inputEmail4"
           />
         </div>
         <div className={addressInputClasses}>
@@ -273,10 +245,7 @@ export default function UserForm(props) {
           </TransparentButton>
         </div>
       </form>
-      <GoToTop/>
+      <GoToTop />
     </div>
   );
 }
-
-
-

@@ -5,6 +5,7 @@ import AuthContext from "../../Context/auth-context";
 
 export default function User() {
   const authCtx = useContext(AuthContext);
+  const {token} = authCtx
   const [user, setUser] = useState({
     name: null,
     email: null,
@@ -20,30 +21,31 @@ export default function User() {
     const getUser = async () => {
       try {
         setIsLoading(true);
-        let userID = JSON.parse(localStorage.getItem("userID"));
         const response = await fetch(
-          `https://e-commerce-eb5e0-default-rtdb.firebaseio.com/users/${userID}/user.json`
+          `http://localhost:8080/api/v1/users/getUser`,
+          { headers: { 'Authorization': `Bearer ${token}` } }
         );
 
         if (!response.ok) {
-          throw new Error("something went wrong!!");
+          const errorData = await response.json()
+          throw new Error(errorData.message);
         }
         setIsLoading(false);
-        const data = await response.json();
-
-        setUser(data);
+        const {data} = await response.json();
+        console.log(data)
+        setUser(data.user);
       } catch (error) {
         setIsLoading(false);
         console.log(error);
       }
     };
     getUser();
-  }, []);
+  }, [token]);
 
   if (isLoading) {
     return (
       <>
-        <div style={{height:"100vh"}}></div>
+        <div style={{ height: "100vh" }}></div>
         <Model>
           <div className="text-center">
             <div className="spinner-border" role="status">

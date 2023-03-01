@@ -25,82 +25,110 @@ export default function AuthForm(props) {
     blurHandler: passwordInputBlurHandler,
     reset: passwordInputReset,
   } = useInput((value) => value.length > 7);
+  const {
+    inputValue: passwordConfirmInputValue,
+    inputIsValid: passwordConfirmInputIsValid,
+    inputIsInvalid: passwordConfirmInputIsInvalid,
+    inputChangeHandler: passwordConfirmInputChangeHandler,
+    blurHandler: passwordConfirmInputBlurHandler,
+    reset: passwordConfirmInputReset,
+  } = useInput((value) => value.length > 7);
 
   const modeHandler = () => {
     setIsLogin((prevState) => !prevState);
   };
 
   let formIsValid = false;
-  if (emailInputIsValid && passwordInputIsValid) {
-    formIsValid = true;
+  if (isLogin) {
+    if (emailInputIsValid && passwordInputIsValid) {
+      formIsValid = true;
+    }
+  } else {
+    if (
+      emailInputIsValid &&
+      passwordInputIsValid &&
+      passwordConfirmInputIsValid
+    ) {
+      formIsValid = true;
+    }
   }
 
-  const authFormSubmitHandler = (event) => {
-    props.setLoading(true)
+  const authFormSubmitHandler = async (event) => {
+    props.setLoading(true);
     event.preventDefault();
-    let url;
-    if (isLogin) {
-      url =
-        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCNhFI9T4RLwVxvuPPwIrxNJKccDAR7vVA";
-    } else {
-      url =
-        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCNhFI9T4RLwVxvuPPwIrxNJKccDAR7vVA";
-    }
-    fetch(url, {
-      method: "POST",
-      body: JSON.stringify({
-        email: emailInputValue,
-        password: passwordInputValue,
-        returnSecureToken: true,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => {
-        if (!res.ok) {
-          return res.json().then((data) => {
-            throw new Error(data.error.message);
-          });
-        } else {
-          return res.json();
-        }
-      })
-      .then((data) => {
-        props.setLoading(false)
-        props.setAlert({show:true,message:"Request Accepted",status:"successful"})
-        setTimeout(()=>{
-          props.setAlert({show:false,message:null,status:null})
-        },1000)
-        if (isLogin) {
-          setTimeout(() => {
-            authCtx.login(data.idToken);
-            navigate(authCtx.location);
-            authCtx.signup(true);
-          }, 1000);
-        } else {
-          setTimeout(() => {
-            authCtx.signup(true);
-            props.getToken(data.idToken);
-          }, 1200);
-        }
-      })
-      .catch((error) => {
-        props.setLoading(false)
-        props.setAlert({show:true,message:error.message,status:"unsuccessful"})
-        setTimeout(()=>{
-          props.setAlert({show:false,message:null,status:null})
-        },1000)
+    try {
+      let response;
+      if (isLogin) {
+        response = await fetch("url", {
+          method: "POST",
+          body: JSON.stringify({
+            email: emailInputValue,
+            password: passwordInputValue,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+      } else {
+        response = await fetch("http://localhost:8080/api/v1/users/signup", {
+          method: "POST",
+          body: JSON.stringify({
+            email: emailInputValue,
+            password: passwordInputValue,
+            passwordConfirm: passwordConfirmInputValue,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+      }
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message);
+      }
+      props.setLoading(false);
+      props.setAlert({
+        show: true,
+        message: "Request Accepted",
+        status: "successful",
       });
-
-    emailInputReset();
-    passwordInputReset();
+      setTimeout(() => {
+        props.setAlert({ show: false, message: null, status: null });
+      }, 1000);
+      const data = await response.json(); //{status:'success', token:'abc',data:{user}
+      if (isLogin) {
+        setTimeout(()=>{
+          authCtx.saveToken(data.token);
+          navigate(authCtx.location);
+        },1000)
+      } else {
+        setTimeout(()=>{
+          props.onSignupToken(data.token);
+        },1000)
+      }
+      emailInputReset();
+      passwordInputReset();
+      passwordConfirmInputReset();
+    } catch (error) {
+      props.setLoading(false);
+      props.setAlert({
+        show: true,
+        message: error.message,
+        status: "unsuccessful",
+      });
+      setTimeout(() => {
+        props.setAlert({ show: false, message: null, status: null });
+      }, 1000);
+    }
   };
 
   const emailInputClasses = emailInputIsInvalid
     ? `${"mb-3"} ${style.formInput} ${style.invalid}`
     : `${"mb-3"} ${style.formInput}`;
   const passwordInputClasses = passwordInputIsInvalid
+    ? `${"mb-3"} ${style.formInput} ${style.invalid}`
+    : `${"mb-3"} ${style.formInput}`;
+  const passwordConfirmInputClasses = passwordConfirmInputIsInvalid
     ? `${"mb-3"} ${style.formInput} ${style.invalid}`
     : `${"mb-3"} ${style.formInput}`;
 
@@ -140,6 +168,21 @@ export default function AuthForm(props) {
             id="userPassword"
           />
         </div>
+        {!isLogin && (
+          <div className={passwordConfirmInputClasses}>
+            <label htmlFor="userPasswordConfirm" className="form-label">
+              Confirm Password
+            </label>
+            <input
+              onChange={passwordConfirmInputChangeHandler}
+              onBlur={passwordConfirmInputBlurHandler}
+              value={passwordConfirmInputValue}
+              type="password"
+              className="form-control"
+              id="userPasswordConfirm"
+            />
+          </div>
+        )}
         <TransparentButton type="submit" disabled={!formIsValid}>
           {isLogin ? "Login" : "Sign Up"}
         </TransparentButton>

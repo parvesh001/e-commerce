@@ -1,10 +1,9 @@
-import React, { useContext, useState, useReducer } from "react";
+import React, { useState, useReducer } from "react";
 import AuthForm from "../Components/Forms/AuthForm";
 import UserForm from "../Components/Forms/UserForm";
-import Model from "../UI/Model/Model";
-import Alert from "../UI/Alert/Alert";
-import AuthContext from "../Context/auth-context";
-import GoToTop from "../Components/GoTop/GoToTop";
+import Alert from "../UI/Alert/Alert"
+import Model from "../UI/Model/Model"
+import style from "./Authentication.module.scss";
 
 const initialState = {
   isLoading: false,
@@ -32,24 +31,23 @@ const sideEffectReducer = (state, action) => {
 };
 
 export default function Authentication() {
-  const authCtx = useContext(AuthContext);
-  const [token, setToken] = useState("");
-
+  const [signupToken, setSignupToken] = useState(null);
   const [sideEffect, dispatchSideEffect] = useReducer(
     sideEffectReducer,
     initialState
   );
+
   const setIsLoadingHandler = (boolean) => {
     dispatchSideEffect({ type: "SET_LOADING", value: boolean });
   };
+
   const setAlertHandler = (alertKeys) => {
     dispatchSideEffect({ type: "SET_ALERT", value: alertKeys });
   };
 
-  const tokenHandler = (token) => {
-    setToken(token);
+  const signupTokenHandler = (token) => {
+    setSignupToken(token);
   };
-
   return (
     <React.Fragment>
       {sideEffect.isLoading && (
@@ -64,27 +62,10 @@ export default function Authentication() {
       {!sideEffect.isLoading && sideEffect.show && (
         <Alert className={sideEffect.status} alertMsg={sideEffect.message} />
       )}
-      <div
-        className="d-flex align-items-center justify-content-center"
-        style={{ minHeight: "100vh" }}
-      >
-        {authCtx.isSignedup && (
-          <UserForm
-            token={token}
-            setLoading={setIsLoadingHandler}
-            setAlert={setAlertHandler}
-          />
-        )}
-        {!authCtx.isSignedup && (
-          <AuthForm
-            getToken={tokenHandler}
-            setLoading={setIsLoadingHandler}
-            setAlert={setAlertHandler}
-            status = {sideEffect.status}
-          />
-        )}
+      <div className={style["auth-page-container"]}>
+        {!signupToken && <AuthForm setLoading={setIsLoadingHandler} setAlert={setAlertHandler} onSignupToken={signupTokenHandler} />}
+        {signupToken && <UserForm setLoading={setIsLoadingHandler} setAlert={setAlertHandler} token={signupToken} />}
       </div>
-      <GoToTop />
     </React.Fragment>
   );
 }
